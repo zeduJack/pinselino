@@ -49,6 +49,10 @@
 - Entscheidung: Motive und Fortschritt funktionieren in Version 1 lokal und
   ohne Benutzerkonto oder Backend.
 - Grund: Zuverlässigkeit, Kinderschutz und geringere technische Komplexität.
+- Umsetzung: Ein `ProgressStore`-Port trennt die Anwendung vom
+  `SharedPreferences`-Adapter. Gespeichert werden versionierte JSON-Striche pro
+  Motiv; beschädigte oder unbekannte Versionen fallen sicher auf einen leeren
+  Stand zurück.
 
 ### Fortschritt und Commit-Disziplin
 
@@ -98,12 +102,14 @@
 
 ## Noch zu entscheiden
 
-### State-Management-Paket
+### State Management ohne Zusatzpaket
 
-- Status: `Deferred`
-- Entscheidung: Erst nach einem kleinen vertikalen Spike auswählen.
-- Kandidatenbewertung: geringe Magie, gute Testbarkeit, klare Zustandsquelle und
-  wenig Boilerplate.
+- Status: `Active`
+- Entscheidung: Für das MVP genügen ein testbarer `ColoringController` und
+  lokaler Widget-Zustand. Ein State-Management-Paket wird erst bei nachgewiesenem
+  Bedarf ergänzt.
+- Grund: Der Zustand ist pro geöffnetem Motiv klar begrenzt; zusätzliche
+  Abstraktionen würden derzeit keinen entsprechenden Nutzen liefern.
 
 ### Ergänzendes Bildvergleichswerkzeug
 

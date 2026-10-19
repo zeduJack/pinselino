@@ -79,10 +79,11 @@ final class ColoringController {
   }
 
   void restore(Iterable<PaintStroke> strokes) {
+    final regionIds = page.regions.map((region) => region.id).toSet();
     _activeStroke = null;
     _completedStrokes
       ..clear()
-      ..addAll(strokes);
+      ..addAll(strokes.where((stroke) => regionIds.contains(stroke.regionId)));
     _redoStrokes.clear();
   }
 }

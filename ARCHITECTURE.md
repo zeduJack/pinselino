@@ -157,6 +157,13 @@ Für Version 1 sind höchstens folgende Ports vorgesehen:
 Keine Interfaces für Farben, Buttons, Navigation oder andere rein interne
 Details auf Vorrat.
 
+Der derzeitige `ProgressStore` ist der konkrete Port für Malfortschritt. Die
+Produktlogik arbeitet nur gegen diesen Vertrag; der Produktionsadapter nutzt
+`SharedPreferences`, Tests nutzen einen speicherinternen Adapter. Das JSON-
+Format besitzt eine Versionsnummer. Nicht lesbare oder fremde Versionen werden
+als leerer Fortschritt behandelt, und nicht mehr vorhandene Regions-IDs werden
+beim Wiederherstellen verworfen.
+
 ## 9. Nichtfunktionale Anforderungen
 
 - Kernfunktion vollständig offline

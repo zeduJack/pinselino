@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:pinselino/app/pinselino_app.dart';
+import 'package:pinselino/features/coloring/application/progress_store.dart';
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +13,9 @@ void main() {
   testWidgets('continuous coloring remains within the Phase 1 frame budget', (
     tester,
   ) async {
-    await tester.pumpWidget(const PinselinoApp());
+    await tester.pumpWidget(PinselinoApp(progressStore: MemoryProgressStore()));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('motif_cat')));
     await tester.pumpAndSettle();
 
     final frameTimings = <FrameTiming>[];

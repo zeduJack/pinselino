@@ -26,18 +26,10 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: Phase 2, Slice 2 – Motivauswahl und lokaler Speicher
-- Ziel: Das Testmotiv auswählbar machen und seinen Fortschritt automatisch über
-  App-Neustarts hinweg speichern und wiederherstellen.
-- Akzeptanz: Speicherformat und Fehlerfälle sind per Unit-Test abgedeckt; der
-  vollständige Auswahl-, Mal-, Speicher- und Fortsetzungsfluss ist als
-  Widget-/Integrationstest abgesichert.
-- Betroffene Dateien: Coloring-Persistenzport und -Adapter, App-Navigation,
-  Auswahl- und Malbildschirm, zugehörige Unit-/Widgettests und `PLAN.md`
-- Letzte Verifikation: Phase-2-Malwerkzeuge gezielt getestet; vollständiges Gate
-  und Commit folgen unmittelbar für Slice 1.
-- Nächster Schritt: Slice 1 vollständig verifizieren, committen und pushen;
-  anschließend versionierten lokalen Speicher implementieren.
+- Aktiver Task: keiner – Phase 3 abgeschlossen
+- Letzter Stand: Phasen 2 und 3 sind implementiert, automatisiert getestet,
+  vollständig verifiziert, committet und gepusht.
+- Nächster Schritt: Phase 4 beginnt erst auf ausdrücklichen Auftrag.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -115,23 +107,37 @@ Abnahme der Phase:
 
 ## Phase 2 — Erster kompletter Ausmalfluss
 
-- [ ] Motivauswahl mit einem Testmotiv
+- Status: `[x]` abgeschlossen
+
+- [x] Motivauswahl mit einem Testmotiv
 - [x] Acht Farben und ein einfacher Stift
 - [x] Strich beginnen, fortsetzen und abschließen
 - [x] Undo und Redo
 - [x] Randbegrenzter Radierer
 - [x] Zurücksetzen mit kindgerechter Sicherung
-- [ ] lokalen Fortschritt automatisch speichern und wiederherstellen
-- [ ] kompletter Flow als Widget-/Integrationstest
+- [x] lokalen Fortschritt automatisch speichern und wiederherstellen
+- [x] kompletter Flow als Widget-/Integrationstest
+
+Abnahme am 2026-10-20: Auswahl, Malen, Autosave, Fortsetzen und bestätigtes
+Zurücksetzen sind als Widget-Flow getestet; Controller- und Speicherregeln sind
+mit Unit-Tests abgedeckt.
 
 ## Phase 3 — MVP-Inhalt und Galerie
 
-- [ ] Sechs eigene, technisch validierte Ausmalmotive
-- [ ] drei klar unterscheidbare Werkzeuge
-- [ ] kindgerechte Motivkategorien und Navigation
-- [ ] lokale Galerie mit Vorschaubildern
-- [ ] Fortschritt je Motiv fortsetzen oder neu beginnen
-- [ ] leere, beschädigte und alte Speicherstände robust behandeln
+- Status: `[x]` abgeschlossen
+
+- [x] Sechs eigene, technisch validierte Ausmalmotive
+- [x] drei klar unterscheidbare Werkzeuge
+- [x] kindgerechte Motivkategorien und Navigation
+- [x] lokale Galerie mit Vorschaubildern
+- [x] Fortschritt je Motiv fortsetzen oder neu beginnen
+- [x] leere, beschädigte und alte Speicherstände robust behandeln
+
+Abnahme am 2026-10-20: Der Katalogtest validiert sechs eindeutige Motive,
+Kategorien, Grenzen und Mindestflächen. Codec-Tests decken Roundtrip, leere,
+beschädigte und alte Daten ab; unbekannte Regions-IDs werden beim
+Wiederherstellen verworfen. Der vollständige Widget-Flow prüft Galerie,
+Kategorien, Werkzeuge, Autosave und Fortsetzen.
 
 ## Phase 4 — Kinder-, Geräte- und Store-Reife
 

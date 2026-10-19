@@ -63,3 +63,9 @@ Ergebnis: Phase-1-Gate und 60-fps-Produktziel bestanden. Eine zusätzliche
 reale ADB-Wischgeste quer durch alle drei Regionen wurde visuell geprüft: Farbe
 blieb in der linken Startregion, die zwei Nachbarregionen blieben weiß und die
 schwarzen Konturen blieben sichtbar.
+
+Nach Abschluss von Phase 3 wurde dasselbe Szenario mit Galerie-Navigation,
+Produktmotiv und dem um Radierer sowie Werkzeugstile erweiterten Renderer erneut
+auf dem Samsung SM-S928B gemessen: 362 Frames, Total-p90 4,328 ms, Build-p90
+1,440 ms und Raster-p90 2,151 ms. Damit bleibt auch der MVP-Stand deutlich unter
+dem 16,7-ms-Produktziel.

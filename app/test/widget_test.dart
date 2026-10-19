@@ -1,43 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pinselino/app/pinselino_app.dart';
+import 'package:pinselino/features/coloring/application/progress_store.dart';
 
 void main() {
-  testWidgets('coloring tools support palette, history, and confirmed reset', (
+  testWidgets('complete flow selects, colors, saves, and continues a motif', (
     tester,
   ) async {
-    await tester.pumpWidget(const PinselinoApp());
+    final store = MemoryProgressStore();
+    await tester.pumpWidget(PinselinoApp(progressStore: store));
+    await tester.pumpAndSettle();
 
-    expect(find.text('Pinselino Mal-Test'), findsOneWidget);
-    expect(
-      find.byKey(const ValueKey('coloring_canvas_gesture')),
-      findsOneWidget,
-    );
+    expect(find.byKey(const ValueKey('motif_cat')), findsOneWidget);
+    expect(find.byKey(const ValueKey('motif_fish')), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('category_nature')));
+    await tester.pump();
+    expect(find.byKey(const ValueKey('motif_flower')), findsOneWidget);
+    expect(find.byKey(const ValueKey('motif_cat')), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('category_all')));
+    await tester.pump();
+    await tester.tap(find.byKey(const ValueKey('motif_cat')));
+    await tester.pumpAndSettle();
+
     for (var index = 0; index < 8; index++) {
       expect(find.byKey(ValueKey('color_$index')), findsOneWidget);
     }
     expect(find.byKey(const ValueKey('tool_marker')), findsOneWidget);
+    expect(find.byKey(const ValueKey('tool_crayon')), findsOneWidget);
+    expect(find.byKey(const ValueKey('tool_softBrush')), findsOneWidget);
     expect(find.byKey(const ValueKey('tool_eraser')), findsOneWidget);
 
     final canvas = find.byKey(const ValueKey('coloring_canvas_gesture'));
-    await tester.dragFrom(tester.getCenter(canvas), const Offset(25, 10));
+    await tester.dragFrom(tester.getCenter(canvas), const Offset(20, 10));
     await tester.pump();
+    expect(await store.load('cat'), isNotEmpty);
 
-    expect(
-      tester
-          .widget<IconButton>(find.byKey(const ValueKey('undo_button')))
-          .onPressed,
-      isNotNull,
-    );
-    await tester.tap(find.byKey(const ValueKey('undo_button')));
-    await tester.pump();
-    expect(
-      tester
-          .widget<IconButton>(find.byKey(const ValueKey('redo_button')))
-          .onPressed,
-      isNotNull,
-    );
-    await tester.tap(find.byKey(const ValueKey('redo_button')));
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('motif_cat')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('continue_motif')), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('continue_motif')));
+    await tester.pumpAndSettle();
+    expect(find.text('Katze'), findsOneWidget);
+
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('motif_cat')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('restart_motif')));
+    await tester.pumpAndSettle();
+    expect(await store.load('cat'), isEmpty);
+  });
+
+  testWidgets('reset requires confirmation and removes saved progress', (
+    tester,
+  ) async {
+    final store = MemoryProgressStore();
+    await tester.pumpWidget(PinselinoApp(progressStore: store));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('motif_cat')));
+    await tester.pumpAndSettle();
+    final canvas = find.byKey(const ValueKey('coloring_canvas_gesture'));
+    await tester.dragFrom(tester.getCenter(canvas), const Offset(20, 10));
     await tester.pump();
 
     await tester.tap(find.byKey(const ValueKey('reset_button')));
@@ -45,22 +70,12 @@ void main() {
     expect(find.text('Bild neu anfangen?'), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('cancel_reset')));
     await tester.pumpAndSettle();
-    expect(
-      tester
-          .widget<IconButton>(find.byKey(const ValueKey('undo_button')))
-          .onPressed,
-      isNotNull,
-    );
+    expect(await store.load('cat'), isNotEmpty);
 
     await tester.tap(find.byKey(const ValueKey('reset_button')));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('confirm_reset')));
     await tester.pumpAndSettle();
-    expect(
-      tester
-          .widget<IconButton>(find.byKey(const ValueKey('undo_button')))
-          .onPressed,
-      isNull,
-    );
+    expect(await store.load('cat'), isEmpty);
   });
 }

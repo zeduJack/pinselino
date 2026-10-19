@@ -96,6 +96,21 @@ void main() {
     expect(controller.canUndo, isFalse);
     expect(controller.canRedo, isFalse);
   });
+
+  test('restore ignores strokes for regions absent from the motif', () {
+    final controller = ColoringController(page: createTestColoringPage());
+
+    controller.restore([
+      PaintStroke(
+        regionId: 'removed-by-newer-motif',
+        colorArgb: 0xFFFF0000,
+        width: 20,
+        points: const [Point2D(50, 50)],
+      ),
+    ]);
+
+    expect(controller.strokes, isEmpty);
+  });
 }
 
 void _drawStroke(ColoringController controller, Point2D point, int colorArgb) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../application/coloring_controller.dart';
+import '../application/progress_store.dart';
+import '../domain/coloring_motif.dart';
 import '../domain/paint_stroke.dart';
-import '../domain/test_coloring_page.dart';
 import 'coloring_canvas.dart';
 
 const coloringPalette = <int>[
@@ -17,7 +18,16 @@ const coloringPalette = <int>[
 ];
 
 class ColoringSpikeScreen extends StatefulWidget {
-  const ColoringSpikeScreen({super.key});
+  const ColoringSpikeScreen({
+    required this.motif,
+    required this.progressStore,
+    required this.initialStrokes,
+    super.key,
+  });
+
+  final ColoringMotif motif;
+  final ProgressStore progressStore;
+  final List<PaintStroke> initialStrokes;
 
   @override
   State<ColoringSpikeScreen> createState() => _ColoringSpikeScreenState();
@@ -31,7 +41,21 @@ class _ColoringSpikeScreenState extends State<ColoringSpikeScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = ColoringController(page: createTestColoringPage());
+    _controller = ColoringController(page: widget.motif.page)
+      ..restore(widget.initialStrokes);
+  }
+
+  Future<void> _save() =>
+      widget.progressStore.save(widget.motif.page.id, _controller.strokes);
+
+  void _undo() {
+    setState(_controller.undo);
+    _save();
+  }
+
+  void _redo() {
+    setState(_controller.redo);
+    _save();
   }
 
   double get _brushWidth => switch (_selectedBrush) {
@@ -66,29 +90,26 @@ class _ColoringSpikeScreenState extends State<ColoringSpikeScreen> {
     );
     if (shouldReset == true && mounted) {
       setState(_controller.reset);
+      await widget.progressStore.delete(widget.motif.page.id);
     }
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('Pinselino Mal-Test'),
+      title: Text(widget.motif.title),
       backgroundColor: Colors.transparent,
       actions: [
         IconButton(
           key: const ValueKey('undo_button'),
           tooltip: 'Rückgängig',
-          onPressed: _controller.canUndo
-              ? () => setState(_controller.undo)
-              : null,
+          onPressed: _controller.canUndo ? _undo : null,
           icon: const Icon(Icons.undo_rounded),
         ),
         IconButton(
           key: const ValueKey('redo_button'),
           tooltip: 'Wiederholen',
-          onPressed: _controller.canRedo
-              ? () => setState(_controller.redo)
-              : null,
+          onPressed: _controller.canRedo ? _redo : null,
           icon: const Icon(Icons.redo_rounded),
         ),
         IconButton(
@@ -117,7 +138,10 @@ class _ColoringSpikeScreenState extends State<ColoringSpikeScreen> {
                   colorArgb: _selectedColor,
                   brushKind: _selectedBrush,
                   brushWidth: _brushWidth,
-                  onStrokeCompleted: () => setState(() {}),
+                  onStrokeCompleted: () {
+                    setState(() {});
+                    _save();
+                  },
                 ),
               ),
             ),
@@ -152,6 +176,20 @@ class _ToolBar extends StatelessWidget {
         kind: BrushKind.marker,
         label: 'Stift',
         icon: Icons.edit_rounded,
+        selected: selected,
+        onSelected: onSelected,
+      ),
+      _ToolButton(
+        kind: BrushKind.crayon,
+        label: 'Kreide',
+        icon: Icons.draw_rounded,
+        selected: selected,
+        onSelected: onSelected,
+      ),
+      _ToolButton(
+        kind: BrushKind.softBrush,
+        label: 'Pinsel',
+        icon: Icons.brush_rounded,
         selected: selected,
         onSelected: onSelected,
       ),
