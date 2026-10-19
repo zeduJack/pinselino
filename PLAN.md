@@ -26,7 +26,18 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-Kein Task aktiv. Es sollten keine nicht committierten Dateien vorhanden sein.
+- Aktiver Task: Phase 2, Slice 2 – Motivauswahl und lokaler Speicher
+- Ziel: Das Testmotiv auswählbar machen und seinen Fortschritt automatisch über
+  App-Neustarts hinweg speichern und wiederherstellen.
+- Akzeptanz: Speicherformat und Fehlerfälle sind per Unit-Test abgedeckt; der
+  vollständige Auswahl-, Mal-, Speicher- und Fortsetzungsfluss ist als
+  Widget-/Integrationstest abgesichert.
+- Betroffene Dateien: Coloring-Persistenzport und -Adapter, App-Navigation,
+  Auswahl- und Malbildschirm, zugehörige Unit-/Widgettests und `PLAN.md`
+- Letzte Verifikation: Phase-2-Malwerkzeuge gezielt getestet; vollständiges Gate
+  und Commit folgen unmittelbar für Slice 1.
+- Nächster Schritt: Slice 1 vollständig verifizieren, committen und pushen;
+  anschließend versionierten lokalen Speicher implementieren.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -105,11 +116,11 @@ Abnahme der Phase:
 ## Phase 2 — Erster kompletter Ausmalfluss
 
 - [ ] Motivauswahl mit einem Testmotiv
-- [ ] Acht Farben und ein einfacher Stift
-- [ ] Strich beginnen, fortsetzen und abschließen
-- [ ] Undo und Redo
-- [ ] Randbegrenzter Radierer
-- [ ] Zurücksetzen mit kindgerechter Sicherung
+- [x] Acht Farben und ein einfacher Stift
+- [x] Strich beginnen, fortsetzen und abschließen
+- [x] Undo und Redo
+- [x] Randbegrenzter Radierer
+- [x] Zurücksetzen mit kindgerechter Sicherung
 - [ ] lokalen Fortschritt automatisch speichern und wiederherstellen
 - [ ] kompletter Flow als Widget-/Integrationstest
 

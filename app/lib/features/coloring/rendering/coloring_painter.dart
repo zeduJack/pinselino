@@ -29,6 +29,7 @@ final class ColoringPainter extends CustomPainter {
 
     final motifBounds = Rect.fromLTWH(0, 0, page.size.width, page.size.height);
     canvas.drawRect(motifBounds, Paint()..color = Colors.white);
+    canvas.saveLayer(motifBounds, Paint());
 
     for (final stroke in strokes) {
       final region = page.regionById(stroke.regionId);
@@ -37,6 +38,7 @@ final class ColoringPainter extends CustomPainter {
       _drawStroke(canvas, stroke);
       canvas.restore();
     }
+    canvas.restore();
 
     final contourPaint = Paint()
       ..color = const Color(0xFF252333)
@@ -60,12 +62,18 @@ final class ColoringPainter extends CustomPainter {
   }
 
   void _drawStroke(Canvas canvas, PaintStroke stroke) {
+    final opacity = switch (stroke.brushKind) {
+      BrushKind.crayon => 0.72,
+      BrushKind.softBrush => 0.48,
+      _ => 1.0,
+    };
     final paint = Paint()
-      ..color = Color(stroke.colorArgb)
+      ..color = Color(stroke.colorArgb).withValues(alpha: opacity)
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke.width
       ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round;
+      ..strokeJoin = StrokeJoin.round
+      ..blendMode = stroke.isEraser ? BlendMode.clear : BlendMode.srcOver;
     final first = stroke.points.first;
     if (stroke.points.length == 1) {
       canvas.drawCircle(

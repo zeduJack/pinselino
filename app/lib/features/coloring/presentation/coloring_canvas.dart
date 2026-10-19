@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../application/canvas_transform.dart';
 import '../application/coloring_controller.dart';
 import '../domain/point_2d.dart';
+import '../domain/paint_stroke.dart';
 import '../rendering/coloring_painter.dart';
 
 class ColoringCanvas extends StatefulWidget {
@@ -10,12 +11,16 @@ class ColoringCanvas extends StatefulWidget {
     required this.controller,
     this.colorArgb = 0xFFE84393,
     this.brushWidth = 24,
+    this.brushKind = BrushKind.marker,
+    this.onStrokeCompleted,
     super.key,
   });
 
   final ColoringController controller;
   final int colorArgb;
   final double brushWidth;
+  final BrushKind brushKind;
+  final VoidCallback? onStrokeCompleted;
 
   @override
   State<ColoringCanvas> createState() => _ColoringCanvasState();
@@ -48,6 +53,7 @@ class _ColoringCanvasState extends State<ColoringCanvas> {
               point: point,
               colorArgb: widget.colorArgb,
               width: widget.brushWidth,
+              brushKind: widget.brushKind,
             );
           });
         },
@@ -58,7 +64,10 @@ class _ColoringCanvasState extends State<ColoringCanvas> {
           }
           setState(() => widget.controller.extendStroke(point));
         },
-        onPanEnd: (_) => setState(widget.controller.endStroke),
+        onPanEnd: (_) {
+          setState(widget.controller.endStroke);
+          widget.onStrokeCompleted?.call();
+        },
         child: CustomPaint(
           key: const ValueKey('coloring_canvas_paint'),
           painter: ColoringPainter(
