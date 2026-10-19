@@ -26,7 +26,7 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-Kein Task aktiv. Es sollten keine nicht committeten Dateien vorhanden sein.
+Kein Task aktiv. Es sollten keine nicht committierten Dateien vorhanden sein.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -68,9 +68,15 @@ Kein Task aktiv. Es sollten keine nicht committeten Dateien vorhanden sein.
 
 ## Phase 1 — Technischer Mal-Spike
 
-- [ ] Testmotiv mit drei geschlossenen Teilflächen definieren
-- [ ] Pointer-Koordinaten korrekt in Motivkoordinaten transformieren
-- [ ] Startfläche eines Strichs deterministisch erkennen
+- [x] Testmotiv mit drei geschlossenen Teilflächen definieren
+  - Verifiziert am 2026-10-20 durch Domain-Tests für Anzahl, IDs, Innen-, Außen-
+    und Randpunkte.
+- [x] Pointer-Koordinaten korrekt in Motivkoordinaten transformieren
+  - Verifiziert am 2026-10-20 durch Unit-Tests für breite und hohe Viewports,
+    Roundtrip und Letterbox-Ausschluss.
+- [x] Startfläche eines Strichs deterministisch erkennen
+  - Verifiziert am 2026-10-20 durch Unit-Tests für stabile Asset-Reihenfolge,
+    Start außerhalb einer Fläche und dauerhafte Regionsbindung.
 - [ ] Strich sichtbar auf die Startfläche begrenzen
 - [ ] Konturen sauber über der Farbe rendern
 - [ ] Performance auf Emulator und mindestens einem realen Referenzgerät messen
