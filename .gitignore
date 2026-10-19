@@ -1,0 +1,25 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+coverage/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Generated test artifacts
+test-results/
+patrol_test_results/
+screenshots/
+*.log
+
+# Local runtime data
+local_data/
+tmp/
