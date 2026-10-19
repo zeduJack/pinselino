@@ -1,25 +1,26 @@
 # Pinselino — Teststrategie
 
-Die konkrete Paketwahl wird vor Implementierungsbeginn bestätigt. Dieses
-Dokument definiert bereits die Testgrenzen und den Abschlussvertrag.
+Die Basisauswahl ist festgelegt. Dieses Dokument definiert Testgrenzen und den
+Abschlussvertrag.
 
 ## 1. Vorgesehener Test-Stack
 
-Aus dem VolleyVision-Projekt sinnvoll zu übernehmen:
+Verbindliche Basis:
 
 - `flutter_test` für Dart-Unit- und Flutter-Widget-Tests
 - `flutter analyze` plus `flutter_lints` als statische Qualitätsprüfung
-- Patrol für wenige wichtige Geräte-/App-Flüsse, sobald diese existieren
+- Flutter-eigene Golden-Tests für stabile Canvas-/Maskenresultate
 - stabile `ValueKey`s oder Semantics für app-eigene Bedienelemente
-- Emulator-Smoke-Test und später ein physischer Android-Referenzpfad
 - Screenshots zur manuellen visuellen Prüfung, nicht als alleinige Testwahrheit
 
-Zusätzlich für diese grafische App zu prüfen:
+Später beim ersten echten Gerätefluss:
 
-- Golden-Tests für stabile Canvas-/Maskenresultate
-- deterministische Bildvergleichstoleranzen pro Plattform/Renderer
-- kleine programmatisch erzeugte Testmotive statt ausschließlich komplexer
-  Produktionsassets
+- Patrol für wenige wichtige Geräte-/App-Flüsse
+- Emulator-Smoke-Test und ein physischer Android-Referenzpfad
+
+Für die grafische App gelten zusätzlich deterministische
+Bildvergleichstoleranzen und kleine programmatisch erzeugte Testmotive statt
+ausschließlich komplexer Produktionsassets.
 
 Nicht übernommen werden Playwright, WebRTC-/Medientests und Serverchecks, da
 Version 1 keine Web- oder Serverkomponente besitzt.
@@ -88,9 +89,9 @@ Zu prüfen sind insbesondere:
 - korrektes Vorschaubild nach Speicherung
 - flüssige Strichdarstellung ohne sichtbare Sprünge
 
-## 5. Geplante Standardbefehle
+## 5. Standardbefehle
 
-Nach Erstellung des Flutter-Projekts gelten mindestens:
+Für gezielte lokale Arbeit gelten mindestens:
 
 ```bash
 cd app
@@ -98,36 +99,24 @@ flutter analyze
 flutter test
 ```
 
-Ein gemeinsames `./scripts/verify.sh` wird mit dem Flutter-Projekt eingerichtet.
-Es ist danach der verpflichtende vollständige Gate:
+`./scripts/verify.sh` ist der verpflichtende vollständige Gate:
 
 - unmittelbar vor jedem Commit ausführen
 - nach dem Commit unmittelbar vor jedem Push erneut ausführen
 - nur bei vollständigem Erfolg committen beziehungsweise pushen
 - auch bei reinen Dokumentationsänderungen ausführen
 
-Der Gate enthält mindestens Analyse, alle Unit-/Widget-Tests und einen
-Debug-Build. Weitere deterministische Integrations- oder Golden-Tests werden
-aufgenommen, sobald sie Teil der verbindlichen Suite sind. Gezielte Tests sind
-der schnelle Entwicklungsloop, aber kein Ersatz für den vollständigen Gate.
+Der Gate löst Abhängigkeiten auf, prüft Formatierung, führt Analyse und alle
+Unit-/Widget-/Golden-Tests aus und baut ein Android-Debug-APK. Weitere
+deterministische Integrationstests werden aufgenommen, sobald sie Teil der
+verbindlichen Suite sind. Gezielte Tests sind der schnelle Entwicklungsloop,
+aber kein Ersatz für den vollständigen Gate.
 
 Patrol-Gerätetests können wegen Laufzeit und Geräteabhängigkeit in einem
 separaten, ebenfalls verpflichtenden Release-/Risiko-Gate liegen. Welche
 Änderungen diesen Gate auslösen, wird vor Beginn der Implementierung eindeutig
 festgelegt.
 
-### Vorläufiger Gate vor Erstellung des Flutter-Projekts
-
-Solange `scripts/verify.sh` und Anwendungscode noch nicht existieren, gilt für
-Dokumentations-Commits:
-
-```bash
-git diff --check
-```
-
-Zusätzlich werden Statuskonvention, Links und Querverweise der geänderten
-Dokumente manuell geprüft. Dieser vorläufige Gate entfällt, sobald der reguläre
-Gate eingerichtet wurde.
 
 ## 6. Testdaten und Reproduzierbarkeit
 

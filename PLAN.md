@@ -52,14 +52,19 @@ Kein Task aktiv. Es sollten keine nicht committeten Dateien vorhanden sein.
   - Verifiziert am 2026-10-20: lokaler Ordner
     `/Users/zedu/workarea/workspaces/pinselino`, `origin` auf
     `https://github.com/zeduJack/pinselino.git`, Dokument-Gate erfolgreich.
-- [ ] Konkreten Flutter-Test-Stack gemeinsam bestätigen
+- [x] Konkreten Flutter-Test-Stack gemeinsam bestätigen
   - Akzeptanz: Entscheidung zu `flutter_test`, Patrol und Golden-Strategie ist
     in `TESTING.md` und `DECISIONS.md` festgehalten.
-  - Verifikation: Dokumentreview.
-- [ ] Flutter-Projekt initialisieren und minimale Qualitätsprüfung einrichten
+  - Verifiziert am 2026-10-20 durch Dokumentreview: `flutter_test`,
+    `flutter_lints` und Flutter-Goldens bilden die Basis; Patrol folgt mit dem
+    ersten plattformabhängigen End-to-End-Flow.
+- [x] Flutter-Projekt initialisieren und minimale Qualitätsprüfung einrichten
   - Akzeptanz: App startet auf mindestens einem Ziel; Analyze, Basistest und
     Debug-Build sind grün; `scripts/verify.sh` existiert.
-  - Verifikation: spätere konkrete Befehle in `TESTING.md`.
+  - Verifiziert am 2026-10-20 mit `./scripts/verify.sh`: Formatierung, Analyze,
+    vollständiger Flutter-Test und Android-Debug-APK erfolgreich. Zusätzlich
+    startete die Debug-App mit `flutter run` erfolgreich auf dem iPhone-17-
+    Simulator (iOS 26.3).
 
 ## Phase 1 — Technischer Mal-Spike
 

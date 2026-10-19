@@ -76,6 +76,16 @@
 - Grund: Randbegrenzung, Koordinaten und Undo/Redo sind zentral und anfällig für
   schwer sichtbare Regressionen.
 
+### Flutter-Testbasis
+
+- Status: `Active`
+- Entscheidung: `flutter_test`, `flutter_lints` und Flutter-eigene Golden-Tests
+  bilden die Testbasis. Patrol wird erst mit dem ersten plattformabhängigen
+  End-to-End-Flow als gezieltes Gerätetestwerkzeug hinzugefügt.
+- Grund: Die erste technische Schwierigkeit liegt in deterministischer
+  Geometrie- und Renderinglogik; dafür sind schnelle Unit-, Widget- und
+  Golden-Tests geeigneter als Geräte-E2E-Tests.
+
 ## Noch zu entscheiden
 
 ### State-Management-Paket
@@ -91,8 +101,8 @@
 - Entscheidung: Direkte SVG-Pfade und vorverarbeitete Masken in einem Spike
   hinsichtlich Korrektheit, Performance und Asset-Aufwand vergleichen.
 
-### Visuelle Regressionstests
+### Ergänzendes Bildvergleichswerkzeug
 
 - Status: `Deferred`
-- Entscheidung: Vor Implementierung festlegen, ob Flutter-Golden-Tests allein
-  genügen oder ein ergänzendes Bildvergleichswerkzeug nötig ist.
+- Entscheidung: Zunächst Flutter-Golden-Tests verwenden und erst bei realen
+  plattformübergreifenden Abweichungen ein weiteres Werkzeug evaluieren.

@@ -17,6 +17,13 @@ Teilfläche, in der er begonnen wurde, und kann schwarze Konturlinien nicht
 
 ## Aktueller Zustand
 
-Es existiert bewusst noch keine Implementierung. Architektur, Arbeitsablauf und
-Teststrategie sind dokumentiert; die Wahl der konkreten Flutter-Testpakete wird
-vor Projektinitialisierung gemeinsam bestätigt.
+Das Flutter-Grundprojekt liegt unter `app/`. Es enthält noch keine
+Pinselino-Produktfunktion.
+
+## Lokale Verifikation
+
+Der vollständige Pflicht-Gate vor jedem Commit und erneut vor jedem Push ist:
+
+```bash
+./scripts/verify.sh
+```
