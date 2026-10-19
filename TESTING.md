@@ -98,10 +98,36 @@ flutter analyze
 flutter test
 ```
 
-Vor einem abgeschlossenen größeren Slice soll ein gemeinsames Skript wie
-`./scripts/verify.sh` Analyse, alle Unit-/Widget-Tests und einen Debug-Build
-ausführen. Patrol wird risikobasiert ergänzt und nicht blind bei jeder
-Dokumentationsänderung gestartet.
+Ein gemeinsames `./scripts/verify.sh` wird mit dem Flutter-Projekt eingerichtet.
+Es ist danach der verpflichtende vollständige Gate:
+
+- unmittelbar vor jedem Commit ausführen
+- nach dem Commit unmittelbar vor jedem Push erneut ausführen
+- nur bei vollständigem Erfolg committen beziehungsweise pushen
+- auch bei reinen Dokumentationsänderungen ausführen
+
+Der Gate enthält mindestens Analyse, alle Unit-/Widget-Tests und einen
+Debug-Build. Weitere deterministische Integrations- oder Golden-Tests werden
+aufgenommen, sobald sie Teil der verbindlichen Suite sind. Gezielte Tests sind
+der schnelle Entwicklungsloop, aber kein Ersatz für den vollständigen Gate.
+
+Patrol-Gerätetests können wegen Laufzeit und Geräteabhängigkeit in einem
+separaten, ebenfalls verpflichtenden Release-/Risiko-Gate liegen. Welche
+Änderungen diesen Gate auslösen, wird vor Beginn der Implementierung eindeutig
+festgelegt.
+
+### Vorläufiger Gate vor Erstellung des Flutter-Projekts
+
+Solange `scripts/verify.sh` und Anwendungscode noch nicht existieren, gilt für
+Dokumentations-Commits:
+
+```bash
+git diff --check
+```
+
+Zusätzlich werden Statuskonvention, Links und Querverweise der geänderten
+Dokumente manuell geprüft. Dieser vorläufige Gate entfällt, sobald der reguläre
+Gate eingerichtet wurde.
 
 ## 6. Testdaten und Reproduzierbarkeit
 

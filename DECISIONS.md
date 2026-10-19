@@ -51,6 +51,15 @@
 - Grund: Menschen und Coding Agents können eine unterbrochene Sitzung anhand
   von Plan und Git-Diff sicher fortsetzen.
 
+### Vollständiger Test-Gate vor Commit und Push
+
+- Status: `Active`
+- Entscheidung: Die vollständige vereinbarte Prüfsuite läuft unmittelbar vor
+  jedem Commit und erneut auf dem committeten Stand vor jedem Push. Das gilt
+  nach Einrichtung des Verifikationsskripts auch für Dokumentationsänderungen.
+- Grund: Weder lokale Historie noch Remote sollen einen wissentlich
+  unvollständig getesteten Stand enthalten.
+
 ### Testpflicht für Business-Logik
 
 - Status: `Active`

@@ -40,7 +40,16 @@ Ausnahme muss in `Current Work` dokumentiert sein.
 ## Vertikale Slices
 
 - In kleinen, testbaren, nutzbaren Slices arbeiten.
-- Ein Slice umfasst bei Bedarf Modell, Logik, Rendering, UI und Tests.
+- Ein Slice ist die kleinste in sich abgeschlossene Produktänderung, die aus
+  Benutzersicht oder technisch einen nachweisbaren Nutzen liefert. Er umfasst
+  alle dafür erforderlichen Teile – bei Bedarf Modell, Logik, Rendering, UI,
+  Tests und Dokumentation – und hinterlässt keine wissentlich halbfertige
+  Funktion auf dem Hauptzweig.
+- Beispiel für einen guten Slice: „Ein Testmotiv laden, beim Aufsetzen die
+  Teilfläche erkennen und einen Strich nachweislich auf diese Fläche begrenzen“,
+  inklusive automatisierter Tests.
+- Kein abgeschlossener Slice wäre: nur alle Datenklassen anzulegen, ohne einen
+  nutzbaren Ablauf und ohne Tests zu integrieren.
 - Keine breite Schicht komplett auf Vorrat implementieren.
 - Keine Abstraktion ohne gegenwärtige fachliche oder technische Grenze.
 - Bestehende, nicht zum Task gehörende Änderungen nicht anfassen.
@@ -72,15 +81,29 @@ Ein Planpunkt darf erst auf `[x]` gesetzt werden, wenn:
 
 Vorgehen beim Abschluss:
 
-1. Tests ausführen und Ergebnis in `PLAN.md` notieren.
-2. Task auf `[x]` setzen und `Current Work` leeren.
-3. Den gesamten zusammengehörigen Slice in einem beschreibenden Commit sichern.
-4. `git status --short` muss danach leer sein. Falls bewusst nicht zugehörige
+1. Unmittelbar vor jedem Commit die vollständige in `TESTING.md` definierte
+   Prüfsuite ausführen. Gezielte Tests während der Entwicklung sind zusätzlich
+   sinnvoll, ersetzen diesen vollständigen Gate aber nicht.
+2. Nur wenn der vollständige Gate erfolgreich ist, Ergebnis und Zeitpunkt in
+   `PLAN.md` notieren.
+3. Task auf `[x]` setzen und `Current Work` leeren.
+4. Den gesamten zusammengehörigen Slice in einem beschreibenden Commit sichern.
+5. `git status --short` muss danach leer sein. Falls bewusst nicht zugehörige
    Änderungen verbleiben, werden sie mit Besitzer und Grund dokumentiert.
+6. Unmittelbar vor jedem Push die vollständige Prüfsuite auf dem committeten
+   Stand erneut ausführen. Nur ein grüner Stand darf gepusht werden.
+7. Den verifizierten Commit pushen. Ist kein Remote konfiguriert oder ein Push
+   nicht möglich, wird dies in `PLAN.md` festgehalten; niemals stillschweigend
+   behaupten, der Stand sei remote gesichert.
 
 Ein fehlgeschlagener oder nicht ausführbarer Test hält den Task auf `[-]`; der
-Grund und der nächste Schritt werden dokumentiert. Nicht automatisch pushen,
-solange kein Remote und keine Push-Regel vereinbart wurden.
+Grund und der nächste Schritt werden dokumentiert. Kein Commit und kein Push
+mit fehlgeschlagenem oder unvollständigem Pflicht-Gate.
+
+Solange noch kein Anwendungscode und kein `scripts/verify.sh` existieren, gilt
+für reine Dokumentations-Commits der in `TESTING.md` beschriebene vorläufige
+Dokument-Gate. Sobald `scripts/verify.sh` existiert, gilt er vor ausnahmslos
+jedem Commit und jedem Push, auch bei reinen Dokumentationsänderungen.
 
 ## Artefakthygiene
 

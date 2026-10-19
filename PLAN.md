@@ -15,6 +15,8 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
   Verifikationsweg.
 - Business-Logik ist ohne passende Unit- oder Integrationstests nicht fertig.
 - Ein Bugfix ist ohne Regressionstest nicht fertig.
+- Vor jedem Commit und erneut vor jedem Push muss die vollständige in
+  `TESTING.md` definierte Prüfsuite erfolgreich laufen.
 - `[x]` wird erst gesetzt, nachdem relevante Tests erfolgreich waren und der
   gesamte Slice committet ist.
 - Ist Arbeit unterbrochen, bleibt der Task `[-]`. `Current Work` beschreibt den
@@ -24,8 +26,7 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-Kein Implementierungstask aktiv. Es sollten keine nicht committeten
-Implementierungsdateien vorhanden sein.
+Kein Task aktiv. Es sollten keine nicht committeten Dateien vorhanden sein.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -35,6 +36,13 @@ Implementierungsdateien vorhanden sein.
     Wiederaufnahme nicht committeter Arbeit, Testpflicht und Commit-Vertrag.
   - Verifikation: Dokumentreview und Querverweisprüfung; keine App-Tests, da
     noch kein Anwendungscode existiert.
+- [x] Commit- und Push-Testpflicht sowie Slice-Definition präzisieren
+  - Akzeptanz: `AGENTS.md` verlangt vor jedem Commit und vor jedem Push die
+    vollständige grüne Prüfsuite; Dokumentations-Commits haben einen expliziten
+    Dokument-Gate; ein Slice ist mit Beispielen definiert.
+  - Verifikation am 2026-10-20: Dokumentreview, `git diff --check` und
+    Querverweisprüfung erfolgreich. Kein Anwendungscode/Testprojekt vorhanden.
+    Push derzeit nicht möglich, weil kein Git-Remote konfiguriert ist.
 - [ ] Konkreten Flutter-Test-Stack gemeinsam bestätigen
   - Akzeptanz: Entscheidung zu `flutter_test`, Patrol und Golden-Strategie ist
     in `TESTING.md` und `DECISIONS.md` festgehalten.
