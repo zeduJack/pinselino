@@ -17,8 +17,10 @@ Teilfläche, in der er begonnen wurde, und kann schwarze Konturlinien nicht
 
 ## Aktueller Zustand
 
-Das Flutter-Grundprojekt liegt unter `app/`. Es enthält noch keine
-Pinselino-Produktfunktion.
+Das Flutter-Projekt liegt unter `app/`. Phase 1 enthält einen technischen
+Mal-Spike mit drei Testflächen, deterministischer Flächenerkennung,
+randbegrenzten Strichen und Kontur-Rendering. Der erste Produktfluss folgt in
+Phase 2.
 
 ## Lokale Verifikation
 

@@ -105,9 +105,11 @@ Version 1 verwendet vorbereitete Vektormotive mit:
 - Metadaten für Titel, Kategorie und Vorschau
 
 Ein Import-/Validierungsschritt muss offene Pfade, doppelte IDs, zu kleine
-Flächen und ungültige Geometrie erkennen. Das genaue Produktionsformat (direkte
-SVG-Auswertung oder vorverarbeitete Pfad-/Maskendaten) wird durch einen
-technischen Spike entschieden, nicht vorab festgeschrieben.
+Flächen und ungültige Geometrie erkennen. SVG bleibt das editierbare
+Quellformat. Ein Build-Schritt validiert und konvertiert es in vorverarbeitete,
+normalisierte Vektorgeometrie mit stabilen IDs. Die App parst im Malpfad kein
+beliebiges SVG und verwendet Rastermasken nur als späteren begründeten Fallback.
+Details und Alternativen stehen in `docs/MOTIF_PIPELINE.md`.
 
 ## 6. Vorgesehene Projektstruktur
 

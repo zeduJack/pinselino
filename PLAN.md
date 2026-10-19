@@ -68,6 +68,8 @@ Kein Task aktiv. Es sollten keine nicht committierten Dateien vorhanden sein.
 
 ## Phase 1 — Technischer Mal-Spike
 
+Status: `[x]` abgeschlossen
+
 - [x] Testmotiv mit drei geschlossenen Teilflächen definieren
   - Verifiziert am 2026-10-20 durch Domain-Tests für Anzahl, IDs, Innen-, Außen-
     und Randpunkte.
@@ -83,8 +85,15 @@ Kein Task aktiv. Es sollten keine nicht committierten Dateien vorhanden sein.
 - [x] Konturen sauber über der Farbe rendern
   - Verifiziert am 2026-10-20 durch visuell geprüfte Golden-Baseline und
     Simulator-Screenshot; schwarze Konturen bleiben vollständig sichtbar.
-- [ ] Performance auf Emulator und mindestens einem realen Referenzgerät messen
-- [ ] SVG-Pfade gegen vorverarbeitete Masken bewerten und Entscheidung festhalten
+- [x] Performance auf Emulator und mindestens einem realen Referenzgerät messen
+  - Verifiziert am 2026-10-20 mit dem reproduzierbaren Interaktions-Benchmark:
+    iPhone-17-Simulator Debug Total-p90 22,647 ms; Samsung SM-S928B Android 16
+    Profile Total-p90 1,693 ms. Reale ADB-Wischgeste und Screenshot bestätigen
+    Clipping und sichtbare Konturen. Details in `docs/PERFORMANCE.md`.
+- [x] SVG-Pfade gegen vorverarbeitete Masken bewerten und Entscheidung festhalten
+  - Verifiziert am 2026-10-20 durch dokumentierten Variantenvergleich in
+    `docs/MOTIF_PIPELINE.md`; gewählt ist SVG als Quelle mit vorverarbeiteter
+    Vektorgeometrie zur Laufzeit.
 
 Abnahme der Phase:
 

@@ -86,6 +86,16 @@
   Geometrie- und Renderinglogik; dafür sind schnelle Unit-, Widget- und
   Golden-Tests geeigneter als Geräte-E2E-Tests.
 
+### Motiv- und Maskenpipeline
+
+- Status: `Active`
+- Entscheidung: SVG ist das editierbare Quellformat, wird aber vor dem
+  App-Build validiert und in normalisierte Vektorgeometrie mit stabilen IDs und
+  separaten Konturen konvertiert. Kein allgemeines SVG-Parsing im Malpfad;
+  Rastermasken nur als begründeter Fallback.
+- Grund: Dies verbindet frühe Asset-Validierung und deterministisches Verhalten
+  mit auflösungsunabhängigem Rendering und niedrigem Laufzeitspeicher.
+
 ## Noch zu entscheiden
 
 ### State-Management-Paket
@@ -94,12 +104,6 @@
 - Entscheidung: Erst nach einem kleinen vertikalen Spike auswählen.
 - Kandidatenbewertung: geringe Magie, gute Testbarkeit, klare Zustandsquelle und
   wenig Boilerplate.
-
-### Motiv- und Maskenpipeline
-
-- Status: `Deferred`
-- Entscheidung: Direkte SVG-Pfade und vorverarbeitete Masken in einem Spike
-  hinsichtlich Korrektheit, Performance und Asset-Aufwand vergleichen.
 
 ### Ergänzendes Bildvergleichswerkzeug
 

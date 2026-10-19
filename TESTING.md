@@ -117,6 +117,20 @@ separaten, ebenfalls verpflichtenden Release-/Risiko-Gate liegen. Welche
 Änderungen diesen Gate auslösen, wird vor Beginn der Implementierung eindeutig
 festgelegt.
 
+### Mal-Performance
+
+Der reproduzierbare Interaktions-Benchmark läuft auf einem konkreten Ziel mit:
+
+```bash
+./scripts/verify-coloring-performance.sh <device-id> --profile
+```
+
+Auf einem iOS-Simulator wird wegen Apples Build-Beschränkung `--debug`
+verwendet. Vor Abschluss eines Slices, der den Controller-, Pointer- oder
+Renderingpfad wesentlich verändert, muss der Benchmark mindestens auf dem
+vereinbarten Emulator und bei hohem Laufzeitrisiko zusätzlich auf dem physischen
+Referenzgerät grün sein. Messszenario, Budgets und Ergebnisse stehen in
+`docs/PERFORMANCE.md`.
 
 ## 6. Testdaten und Reproduzierbarkeit
 
