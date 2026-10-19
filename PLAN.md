@@ -77,8 +77,12 @@ Kein Task aktiv. Es sollten keine nicht committierten Dateien vorhanden sein.
 - [x] Startfläche eines Strichs deterministisch erkennen
   - Verifiziert am 2026-10-20 durch Unit-Tests für stabile Asset-Reihenfolge,
     Start außerhalb einer Fläche und dauerhafte Regionsbindung.
-- [ ] Strich sichtbar auf die Startfläche begrenzen
-- [ ] Konturen sauber über der Farbe rendern
+- [x] Strich sichtbar auf die Startfläche begrenzen
+  - Verifiziert am 2026-10-20 durch Widget-Interaktion und Golden-Test: Ein
+    Strich durch alle drei Regionen bleibt ausschließlich links sichtbar.
+- [x] Konturen sauber über der Farbe rendern
+  - Verifiziert am 2026-10-20 durch visuell geprüfte Golden-Baseline und
+    Simulator-Screenshot; schwarze Konturen bleiben vollständig sichtbar.
 - [ ] Performance auf Emulator und mindestens einem realen Referenzgerät messen
 - [ ] SVG-Pfade gegen vorverarbeitete Masken bewerten und Entscheidung festhalten
 
