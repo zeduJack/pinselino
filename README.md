@@ -29,3 +29,10 @@ Der vollständige Pflicht-Gate vor jedem Commit und erneut vor jedem Push ist:
 ```bash
 ./scripts/verify.sh
 ```
+
+## Android-Testversion installieren
+
+Die aktuelle APK steht unter
+[GitHub Releases](https://github.com/zeduJack/pinselino/releases/latest) bereit.
+Eine Schritt-für-Schritt-Anleitung für die Installation ohne Play Store steht
+in [`docs/ANDROID_INSTALLATION.md`](docs/ANDROID_INSTALLATION.md).

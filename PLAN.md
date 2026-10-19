@@ -26,10 +26,10 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: keiner – Phase 3 abgeschlossen
-- Letzter Stand: Phasen 2 und 3 sind implementiert, automatisiert getestet,
-  vollständig verifiziert, committet und gepusht.
-- Nächster Schritt: Phase 4 beginnt erst auf ausdrücklichen Auftrag.
+- Aktiver Task: keiner – Android-Testverteilung eingerichtet
+- Letzter Stand: Release-APK auf SM-S928B installiert und gestartet;
+  Release-Workflow, Sideload-Anleitung und vollständiges Test-Gate erfolgreich.
+- Nächster Schritt: Phase 4 wird mit Geräte- und Kinderbeobachtungen fortgesetzt.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -148,6 +148,9 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
 - [ ] Elternbereich für externe oder destruktive Aktionen
 - [ ] Datenschutz-, Store- und Kinderkategorie-Anforderungen prüfen
 - [ ] Release-Verifikationsskript und Checkliste abschließen
+- [x] Android-Testbuild ohne Play Store als GitHub-Release bereitstellen
+  - Verifiziert am 2026-10-20: Release-APK auf SM-S928B installiert und als
+    Vordergrund-App gestartet; Workflow-YAML geprüft; vollständiges Gate grün.
 
 ## Später / nicht Teil von Version 1
 
