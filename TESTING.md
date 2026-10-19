@@ -1,4 +1,4 @@
-# Painting App — Teststrategie
+# Pinselino — Teststrategie
 
 Die konkrete Paketwahl wird vor Implementierungsbeginn bestätigt. Dieses
 Dokument definiert bereits die Testgrenzen und den Abschlussvertrag.

@@ -1,4 +1,4 @@
-# Painting App — Architektur
+# Pinselino — Architektur
 
 ## 1. Architekturentscheidung
 

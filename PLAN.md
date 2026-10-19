@@ -1,4 +1,4 @@
-# Painting App — Plan und Fortschritt
+# Pinselino — Plan und Fortschritt
 
 Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
@@ -43,6 +43,15 @@ Kein Task aktiv. Es sollten keine nicht committeten Dateien vorhanden sein.
   - Verifikation am 2026-10-20: Dokumentreview, `git diff --check` und
     Querverweisprüfung erfolgreich. Kein Anwendungscode/Testprojekt vorhanden.
     Push derzeit nicht möglich, weil kein Git-Remote konfiguriert ist.
+- [x] Repository als Pinselino benennen und GitHub-Remote einrichten
+  - Akzeptanz: lokaler Ordner heißt `pinselino`, Dokumente verwenden den
+    Produktnamen, `origin` zeigt auf das angegebene GitHub-Repository und der
+    verifizierte `main`-Stand ist gepusht.
+  - Verifikation: Dokument-Gate, `git remote -v`, `git status` und erfolgreicher
+    Push.
+  - Verifiziert am 2026-10-20: lokaler Ordner
+    `/Users/zedu/workarea/workspaces/pinselino`, `origin` auf
+    `https://github.com/zeduJack/pinselino.git`, Dokument-Gate erfolgreich.
 - [ ] Konkreten Flutter-Test-Stack gemeinsam bestätigen
   - Akzeptanz: Entscheidung zu `flutter_test`, Patrol und Golden-Strategie ist
     in `TESTING.md` und `DECISIONS.md` festgehalten.

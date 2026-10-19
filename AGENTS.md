@@ -1,4 +1,4 @@
-# Painting App — Agent Workflow
+# Pinselino — Agent Workflow
 
 Diese Datei ist für Codex und andere Coding Agents verbindlich.
 

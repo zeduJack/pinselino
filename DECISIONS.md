@@ -1,4 +1,4 @@
-# Painting App — Entscheidungen
+# Pinselino — Entscheidungen
 
 ## Verwendung
 
@@ -9,6 +9,14 @@
 - Roadmap und Arbeitsstatus gehören in `PLAN.md`, nicht hierher.
 
 ## Aktive Entscheidungen
+
+### Produktname
+
+- Status: `Active`
+- Entscheidung: Produkt, Flutter-Projekt und Repository verwenden den Namen
+  `Pinselino`; der technische Bezeichner lautet `pinselino`.
+- Grund: Der Name ist kurz, kindgerecht und beschreibt durch den Wortstamm
+  „Pinsel“ die kreative Ausrichtung.
 
 ### Produktfokus Version 1
 

@@ -1,4 +1,4 @@
-# Painting App
+# Pinselino
 
 Eine offline-fähige Flutter-Ausmal-App für Kinder von etwa 3½ bis 4½ Jahren.
 
