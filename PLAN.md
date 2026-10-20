@@ -26,11 +26,11 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: keiner – Motiv- und Verschachtelungskorrektur abgeschlossen
-- Letzter Stand: Sechs überarbeitete Motive, ausgesparte innere Teilflächen und
-  vorgerückte Farbstiftauswahl sind implementiert und vollständig getestet.
-- Nächster Schritt: Den neuen Build nach erneutem Verbinden des Android-Geräts
-  installieren und mit Kindern der Zielgruppe beobachten.
+- Aktiver Task: Release-Korrektur – Veröffentlichung ausstehend
+- Letzter Stand: App auf SM-S928B installiert und visuell geprüft; Galerie-Test
+  ist plattformstabil, fachliches Clipping-Golden bleibt erhalten, lokales Gate
+  ist vollständig grün.
+- Nächster Schritt: Commit pushen und GitHub-Release `v0.1.2` bestätigen.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -155,6 +155,10 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
 - [x] Android-Testbuild ohne Play Store als GitHub-Release bereitstellen
   - Verifiziert am 2026-10-20: Release-APK auf SM-S928B installiert und als
     Vordergrund-App gestartet; Workflow-YAML geprüft; vollständiges Gate grün.
+- [-] Release-Test plattformstabil machen und korrigierte APK veröffentlichen
+  - Lokal verifiziert am 2026-10-20: 25 Tests, Analyze und Android-Build grün;
+    App auf SM-S928B als Vordergrund-App gestartet und visuell geprüft. GitHub-
+    Release `v0.1.2` folgt nach Commit und Push.
 
 ## Später / nicht Teil von Version 1
 
