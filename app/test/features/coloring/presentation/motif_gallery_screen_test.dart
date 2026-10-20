@@ -4,7 +4,9 @@ import 'package:pinselino/features/coloring/application/progress_store.dart';
 import 'package:pinselino/features/coloring/presentation/motif_gallery_screen.dart';
 
 void main() {
-  testWidgets('gallery presents all six motif previews', (tester) async {
+  testWidgets('gallery presents vector and raster motif previews', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(900, 1200);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -21,8 +23,18 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    for (final id in ['cat', 'fish', 'flower', 'tree', 'car', 'rocket']) {
+    for (final id in [
+      'elephant-raster',
+      'cat',
+      'fish',
+      'flower',
+      'tree',
+      'car',
+    ]) {
       expect(find.byKey(ValueKey('motif_$id')), findsOneWidget);
     }
+    await tester.drag(find.byType(GridView), const Offset(0, -500));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('motif_rocket')), findsOneWidget);
   });
 }

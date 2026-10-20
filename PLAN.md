@@ -26,14 +26,8 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: keiner – Raster-Pipeline Slice 2 abgeschlossen
-- Letzter Stand: Das validierte Malgruppenprofil erzeugt deterministische
-  kombinierte Pfade und eine technische Region-zu-Gruppe-Tabelle. Der Elefant
-  besitzt fünf große Easy-Malgruppen; Augen, Mund und Vordergrunddekorationen
-  bleiben geschützt. Elf Pipeline-Tests und die visuelle Gruppenvorschau sind
-  grün.
-- Nächster Schritt: Slice 3 integriert ID-Hit-Test, Gruppenclipping,
-  Rasterkontur und Querformat in Flutter.
+- Kein Task in Arbeit. Nächster geplanter Task ist Slice 4: datengetriebene
+  Kategorien und Vorlagenauswahl.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -157,7 +151,13 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
   - Verifiziert am 2026-10-20 durch elf Pipeline-Unit-Tests und visuelle
     Kontrolle der Easy-Gruppenvorschau; vollständige, eindeutige Zuordnung aller
     32 technischen Regionen ist erzwungen.
-- [ ] Slice 3: Raster-/Malgruppen-Laufzeit in Flutter und Querformat
+- [x] Slice 3: Raster-/Malgruppen-Laufzeit in Flutter und Querformat
+  - Verifiziert am 2026-10-20: 28 Flutter-Tests einschließlich Pixel-Lookup,
+    realem Elefant-Asset, Gruppenbindung und Galerie sowie elf Pipeline-Tests
+    sind grün. Android-Debug-Build auf Samsung SM-S928B installiert und im
+    Querformat visuell geprüft; Elefant und drei ausschließlich lokal
+    eingebundene Unity-PoC-Motive laden, Kontur und Startregion begrenzen den
+    gezeichneten Strich. Lokale Fremdassets bleiben ignoriert.
 - [ ] Slice 4: Datengetriebene Kategorien und Vorlagenauswahl
 - [ ] Slice 5: versionierte Speicherung, weitere Motive und Optimierung
 

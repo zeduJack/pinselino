@@ -113,6 +113,15 @@ in einem nachfolgenden Produktionsschritt kindgerechten logischen Malgruppen
 zugeordnet. Während einer Fingerbewegung finden weder Bilderkennung noch
 Flood-Fill oder Pfadvereinigungen statt.
 
+Zur Laufzeit implementiert `RasterRegionLookup` den pixelgenauen
+Startflächen-Lookup hinter dem Domain-Vertrag von `ColoringPage`.
+`RasterMotifLoader` ist der Infrastructure-Adapter für JSON- und PNG-Assets.
+Der bestehende `ColoringController` bleibt unverändert für Strichbindung,
+Undo/Redo und Wiederherstellung zuständig; `ColoringPainter` beschneidet jeden
+Strich mit dem vorberechneten Malgruppenpfad und zeichnet `outline.png` zuletzt.
+Damit wird die Rasterintegration ergänzt, ohne einen parallelen Malzustand oder
+Flutter-Abhängigkeiten im Domainkern einzuführen.
+
 Der Import-/Validierungsschritt meldet offene Konturkandidaten, kleine und
 schmale Flächen und ungültige Eingaben. Details stehen in
 `docs/MOTIF_PIPELINE.md`.

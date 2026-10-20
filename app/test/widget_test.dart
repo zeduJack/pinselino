@@ -13,6 +13,7 @@ void main() {
 
     expect(find.byKey(const ValueKey('motif_cat')), findsOneWidget);
     expect(find.byKey(const ValueKey('motif_fish')), findsOneWidget);
+    expect(find.byKey(const ValueKey('motif_elephant-raster')), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('category_nature')));
     await tester.pump();
     expect(find.byKey(const ValueKey('motif_flower')), findsOneWidget);

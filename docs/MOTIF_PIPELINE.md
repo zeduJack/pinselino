@@ -165,3 +165,32 @@ Fremde Bilder dürfen zur lokalen technischen Beurteilung verarbeitet werden,
 aber weder committed noch ausgeliefert werden. Tests verwenden ausschließlich
 programmatisch erzeugte Fixtures. Eigene oder passend lizenzierte
 Produktionsbilder ersetzen alle Referenzen vor einer Veröffentlichung.
+
+## Flutter-Laufzeit (Slice 3)
+
+Ein produktives Rastermotiv liegt unter `app/assets/coloring/<motiv>/` und
+enthält genau die Laufzeitartefakte `outline.png`, `regions.png`,
+`metadata.json` und `paint_groups_easy.json`. `RasterMotifLoader` dekodiert die
+ID-Maske einmal beim Öffnen und erzeugt daraus einen kompakten Pixel-Lookup.
+`PointerDown` bestimmt damit in konstanter Zeit die Malgruppe. Diese Gruppen-ID
+bleibt bis `PointerUp` unverändert; die zwischen Touchpunkten gezeichnete Linie
+wird vollständig mit dem vorberechneten Even-Odd-Gruppenpfad beschnitten.
+
+Die Kontur wird zuletzt als Rasterbild gezeichnet. Dadurch bleiben auch
+geschützte Details sichtbar. Radierer, Undo/Redo und lokales Speichern verwenden
+dieselben gruppengebundenen `PaintStroke`-Objekte wie die handmodellierten
+Motive. Die Bildschirm-/Bildkoordinaten werden über `CanvasTransform` mit
+`BoxFit.contain` abgebildet, sodass Letterboxing und verschiedene Displays die
+Regionsauswahl nicht verschieben.
+
+Der Elefant ist das erste eingecheckte Produktionsbeispiel. Lokal dürfen die
+ignorierten Verzeichnisse unter `app/assets/local_reference/` mit
+Referenzmotiven befüllt werden. Sie erscheinen ausschließlich in einem lokalen
+Build mit:
+
+```bash
+flutter run --dart-define=PINSELINO_LOCAL_REFERENCES=true
+```
+
+Die Referenzdateien selbst bleiben durch `.gitignore` aus Commit, Push und
+späteren Veröffentlichungen ausgeschlossen.

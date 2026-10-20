@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import '../application/canvas_transform.dart';
@@ -13,6 +15,7 @@ class ColoringCanvas extends StatefulWidget {
     this.brushWidth = 24,
     this.brushKind = BrushKind.marker,
     this.onStrokeCompleted,
+    this.outlineImage,
     super.key,
   });
 
@@ -21,6 +24,7 @@ class ColoringCanvas extends StatefulWidget {
   final double brushWidth;
   final BrushKind brushKind;
   final VoidCallback? onStrokeCompleted;
+  final ui.Image? outlineImage;
 
   @override
   State<ColoringCanvas> createState() => _ColoringCanvasState();
@@ -73,6 +77,7 @@ class _ColoringCanvasState extends State<ColoringCanvas> {
           painter: ColoringPainter(
             page: widget.controller.page,
             strokes: widget.controller.strokes,
+            outlineImage: widget.outlineImage,
           ),
           child: const SizedBox.expand(),
         ),

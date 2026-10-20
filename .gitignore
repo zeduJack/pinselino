@@ -23,4 +23,15 @@ screenshots/
 
 # Local runtime data
 local_data/
+app/assets/local_reference/*
+!app/assets/local_reference/.gitkeep
+!app/assets/local_reference/unity-simple/
+!app/assets/local_reference/unity-medium/
+!app/assets/local_reference/unity-complex/
+app/assets/local_reference/unity-simple/*
+app/assets/local_reference/unity-medium/*
+app/assets/local_reference/unity-complex/*
+!app/assets/local_reference/unity-simple/.gitkeep
+!app/assets/local_reference/unity-medium/.gitkeep
+!app/assets/local_reference/unity-complex/.gitkeep
 tmp/

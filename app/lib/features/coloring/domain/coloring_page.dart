@@ -1,11 +1,16 @@
 import 'coloring_region.dart';
 import 'point_2d.dart';
 
+abstract interface class RegionLookup {
+  String? regionIdAt(Point2D point);
+}
+
 final class ColoringPage {
   ColoringPage({
     required this.id,
     required this.size,
     required Iterable<ColoringRegion> regions,
+    this.regionLookup,
   }) : regions = List.unmodifiable(regions) {
     if (id.isEmpty) {
       throw ArgumentError.value(id, 'id', 'must not be empty');
@@ -22,10 +27,15 @@ final class ColoringPage {
   final String id;
   final Size2D size;
   final List<ColoringRegion> regions;
+  final RegionLookup? regionLookup;
 
   /// Returns the smallest matching region so nested details remain paintable.
   /// Asset order is the deterministic tie-breaker for equal-sized regions.
   ColoringRegion? regionAt(Point2D point) {
+    final lookupId = regionLookup?.regionIdAt(point);
+    if (regionLookup != null) {
+      return lookupId == null ? null : regionById(lookupId);
+    }
     final matches = regions.where((region) => region.contains(point)).toList()
       ..sort((left, right) => left.area.compareTo(right.area));
     return matches.firstOrNull;

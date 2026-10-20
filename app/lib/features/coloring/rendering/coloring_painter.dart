@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import '../application/canvas_transform.dart';
@@ -7,10 +9,15 @@ import '../domain/paint_stroke.dart';
 import '../domain/point_2d.dart';
 
 final class ColoringPainter extends CustomPainter {
-  const ColoringPainter({required this.page, required this.strokes});
+  const ColoringPainter({
+    required this.page,
+    required this.strokes,
+    this.outlineImage,
+  });
 
   final ColoringPage page;
   final List<PaintStroke> strokes;
+  final ui.Image? outlineImage;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -40,29 +47,48 @@ final class ColoringPainter extends CustomPainter {
     }
     canvas.restore();
 
-    final contourPaint = Paint()
-      ..color = const Color(0xFF252333)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
-      ..strokeJoin = StrokeJoin.round;
-    for (final region in page.regions) {
-      canvas.drawPath(_pathFor(region), contourPaint);
+    final rasterOutline = outlineImage;
+    if (rasterOutline != null) {
+      canvas.drawImageRect(
+        rasterOutline,
+        Rect.fromLTWH(
+          0,
+          0,
+          rasterOutline.width.toDouble(),
+          rasterOutline.height.toDouble(),
+        ),
+        motifBounds,
+        Paint()..filterQuality = FilterQuality.high,
+      );
+    } else {
+      final contourPaint = Paint()
+        ..color = const Color(0xFF252333)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 3
+        ..strokeJoin = StrokeJoin.round;
+      for (final region in page.regions) {
+        canvas.drawPath(_pathFor(region), contourPaint);
+      }
     }
     canvas.restore();
   }
 
   Path _pathFor(ColoringRegion region) {
-    final path = Path();
-    final first = region.vertices.first;
-    path.moveTo(first.x, first.y);
-    for (final point in region.vertices.skip(1)) {
-      path.lineTo(point.x, point.y);
+    final path = Path()..fillType = PathFillType.evenOdd;
+    for (final regionPath in region.paths) {
+      final first = regionPath.points.first;
+      path.moveTo(first.x, first.y);
+      for (final point in regionPath.points.skip(1)) {
+        path.lineTo(point.x, point.y);
+      }
+      path.close();
     }
-    return path..close();
+    return path;
   }
 
   Path _paintablePathFor(ColoringRegion region) {
     final path = _pathFor(region)..fillType = PathFillType.evenOdd;
+    if (region.hasPrecomputedHoles) return path;
     for (final candidate in page.regions) {
       if (candidate.id == region.id || candidate.area >= region.area) continue;
       if (candidate.vertices.every(region.contains)) {
@@ -104,5 +130,7 @@ final class ColoringPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ColoringPainter oldDelegate) =>
-      oldDelegate.page != page || oldDelegate.strokes != strokes;
+      oldDelegate.page != page ||
+      oldDelegate.strokes != strokes ||
+      oldDelegate.outlineImage != outlineImage;
 }

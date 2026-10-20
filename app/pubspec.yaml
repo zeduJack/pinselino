@@ -60,6 +60,13 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/coloring/elephant/
+    - assets/local_reference/
+    - assets/local_reference/unity-simple/
+    - assets/local_reference/unity-medium/
+    - assets/local_reference/unity-complex/
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

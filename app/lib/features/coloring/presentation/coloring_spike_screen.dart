@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 
 import '../application/coloring_controller.dart';
@@ -22,12 +24,14 @@ class ColoringSpikeScreen extends StatefulWidget {
     required this.motif,
     required this.progressStore,
     required this.initialStrokes,
+    this.outlineImage,
     super.key,
   });
 
   final ColoringMotif motif;
   final ProgressStore progressStore;
   final List<PaintStroke> initialStrokes;
+  final ui.Image? outlineImage;
 
   @override
   State<ColoringSpikeScreen> createState() => _ColoringSpikeScreenState();
@@ -138,6 +142,7 @@ class _ColoringSpikeScreenState extends State<ColoringSpikeScreen> {
                   colorArgb: _selectedColor,
                   brushKind: _selectedBrush,
                   brushWidth: _brushWidth,
+                  outlineImage: widget.outlineImage,
                   onStrokeCompleted: () {
                     setState(() {});
                     _save();
