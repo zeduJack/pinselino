@@ -26,11 +26,10 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: Release-Korrektur – Veröffentlichung ausstehend
-- Letzter Stand: App auf SM-S928B installiert und visuell geprüft; Galerie-Test
-  ist plattformstabil, fachliches Clipping-Golden bleibt erhalten, lokales Gate
-  ist vollständig grün.
-- Nächster Schritt: Commit pushen und GitHub-Release `v0.1.2` bestätigen.
+- Aktiver Task: keiner – Version 0.1.2 veröffentlicht
+- Letzter Stand: App auf SM-S928B installiert und visuell geprüft; lokales Gate
+  und GitHub-Release-Workflow sind grün; die öffentliche APK ist verfügbar.
+- Nächster Schritt: Weitere Änderungen beginnen mit einem neuen `[-]`-Task.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -155,10 +154,11 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
 - [x] Android-Testbuild ohne Play Store als GitHub-Release bereitstellen
   - Verifiziert am 2026-10-20: Release-APK auf SM-S928B installiert und als
     Vordergrund-App gestartet; Workflow-YAML geprüft; vollständiges Gate grün.
-- [-] Release-Test plattformstabil machen und korrigierte APK veröffentlichen
+- [x] Release-Test plattformstabil machen und korrigierte APK veröffentlichen
   - Lokal verifiziert am 2026-10-20: 25 Tests, Analyze und Android-Build grün;
     App auf SM-S928B als Vordergrund-App gestartet und visuell geprüft. GitHub-
-    Release `v0.1.2` folgt nach Commit und Push.
+    Workflow `39378079764` und Release `v0.1.2` erfolgreich; APK-Asset
+    `Pinselino-v0.1.2.apk` mit 45.267.132 Bytes veröffentlicht.
 
 ## Später / nicht Teil von Version 1
 
