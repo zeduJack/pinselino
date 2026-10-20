@@ -240,11 +240,12 @@ class _ColorPalette extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 58,
+    height: 86,
     child: ListView.separated(
+      padding: const EdgeInsets.fromLTRB(6, 12, 6, 0),
       scrollDirection: Axis.horizontal,
       itemCount: coloringPalette.length,
-      separatorBuilder: (_, _) => const SizedBox(width: 8),
+      separatorBuilder: (_, _) => const SizedBox(width: 7),
       itemBuilder: (context, index) {
         final color = coloringPalette[index];
         final isSelected = color == selectedColor;
@@ -254,27 +255,72 @@ class _ColorPalette extends StatelessWidget {
           selected: isSelected,
           child: InkWell(
             key: ValueKey('color_$index'),
-            customBorder: const CircleBorder(),
+            borderRadius: BorderRadius.circular(10),
             onTap: () => onSelected(color),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 120),
-              width: 54,
-              height: 54,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(color),
-                border: Border.all(
-                  color: isSelected ? Colors.white : Colors.transparent,
-                  width: 4,
-                ),
-                boxShadow: isSelected
-                    ? const [BoxShadow(color: Colors.black26, blurRadius: 5)]
-                    : null,
-              ),
+            child: AnimatedSlide(
+              key: ValueKey('color_position_$index'),
+              duration: const Duration(milliseconds: 180),
+              curve: Curves.easeOutBack,
+              offset: isSelected ? const Offset(0, -0.14) : Offset.zero,
+              child: _ColorPencil(color: Color(color), selected: isSelected),
             ),
           ),
         );
       },
+    ),
+  );
+}
+
+class _ColorPencil extends StatelessWidget {
+  const _ColorPencil({required this.color, required this.selected});
+
+  final Color color;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) => AnimatedContainer(
+    duration: const Duration(milliseconds: 180),
+    width: 38,
+    decoration: BoxDecoration(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(18),
+        bottom: Radius.circular(7),
+      ),
+      color: color,
+      border: Border.all(
+        color: selected ? const Color(0xFF252333) : Colors.white,
+        width: selected ? 4 : 2,
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: selected ? 0.3 : 0.12),
+          blurRadius: selected ? 8 : 3,
+          offset: Offset(0, selected ? 5 : 2),
+        ),
+      ],
+    ),
+    child: Column(
+      children: [
+        const SizedBox(height: 8),
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.55),
+            shape: BoxShape.circle,
+          ),
+        ),
+        const Spacer(),
+        Container(
+          height: 10,
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.12),
+            borderRadius: const BorderRadius.vertical(
+              bottom: Radius.circular(5),
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }

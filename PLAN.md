@@ -26,10 +26,11 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: keiner – Android-Testverteilung eingerichtet
-- Letzter Stand: Release-APK auf SM-S928B installiert und gestartet;
-  Release-Workflow, Sideload-Anleitung und vollständiges Test-Gate erfolgreich.
-- Nächster Schritt: Phase 4 wird mit Geräte- und Kinderbeobachtungen fortgesetzt.
+- Aktiver Task: keiner – Motiv- und Verschachtelungskorrektur abgeschlossen
+- Letzter Stand: Sechs überarbeitete Motive, ausgesparte innere Teilflächen und
+  vorgerückte Farbstiftauswahl sind implementiert und vollständig getestet.
+- Nächster Schritt: Den neuen Build nach erneutem Verbinden des Android-Geräts
+  installieren und mit Kindern der Zielgruppe beobachten.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -132,6 +133,9 @@ mit Unit-Tests abgedeckt.
 - [x] lokale Galerie mit Vorschaubildern
 - [x] Fortschritt je Motiv fortsetzen oder neu beginnen
 - [x] leere, beschädigte und alte Speicherstände robust behandeln
+- [x] Motive visuell verbessern und verschachtelte Teilflächen aussparen
+  - Verifiziert am 2026-10-20 durch Domain-RegressionsTest, Clipping-Golden,
+    Galerie-Golden, Widget-Test der Farbstiftauswahl und vollständiges Gate.
 
 Abnahme am 2026-10-20: Der Katalogtest validiert sechs eindeutige Motive,
 Kategorien, Grenzen und Mindestflächen. Codec-Tests decken Roundtrip, leere,

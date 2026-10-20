@@ -34,7 +34,7 @@ final class ColoringPainter extends CustomPainter {
     for (final stroke in strokes) {
       final region = page.regionById(stroke.regionId);
       canvas.save();
-      canvas.clipPath(_pathFor(region), doAntiAlias: true);
+      canvas.clipPath(_paintablePathFor(region), doAntiAlias: true);
       _drawStroke(canvas, stroke);
       canvas.restore();
     }
@@ -59,6 +59,17 @@ final class ColoringPainter extends CustomPainter {
       path.lineTo(point.x, point.y);
     }
     return path..close();
+  }
+
+  Path _paintablePathFor(ColoringRegion region) {
+    final path = _pathFor(region)..fillType = PathFillType.evenOdd;
+    for (final candidate in page.regions) {
+      if (candidate.id == region.id || candidate.area >= region.area) continue;
+      if (candidate.vertices.every(region.contains)) {
+        path.addPath(_pathFor(candidate), Offset.zero);
+      }
+    }
+    return path;
   }
 
   void _drawStroke(Canvas canvas, PaintStroke stroke) {

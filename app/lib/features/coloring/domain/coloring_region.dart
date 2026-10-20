@@ -19,6 +19,16 @@ final class ColoringRegion {
   final String id;
   final List<Point2D> vertices;
 
+  double get area {
+    var twiceArea = 0.0;
+    for (var index = 0; index < vertices.length; index++) {
+      final current = vertices[index];
+      final next = vertices[(index + 1) % vertices.length];
+      twiceArea += current.x * next.y - next.x * current.y;
+    }
+    return twiceArea.abs() / 2;
+  }
+
   /// Returns true for points inside the polygon or directly on its boundary.
   bool contains(Point2D point) {
     var inside = false;

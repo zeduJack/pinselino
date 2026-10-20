@@ -72,5 +72,37 @@ void main() {
 
       expect(page.regionAt(const Point2D(10, 5))?.id, 'first');
     });
+
+    test('small nested detail wins over its containing region', () {
+      final page = _nestedPage();
+
+      expect(page.regionAt(const Point2D(10, 10))?.id, 'outer');
+      expect(page.regionAt(const Point2D(50, 50))?.id, 'inner');
+    });
   });
 }
+
+ColoringPage _nestedPage() => ColoringPage(
+  id: 'nested',
+  size: const Size2D(100, 100),
+  regions: [
+    ColoringRegion(
+      id: 'outer',
+      vertices: const [
+        Point2D(0, 0),
+        Point2D(100, 0),
+        Point2D(100, 100),
+        Point2D(0, 100),
+      ],
+    ),
+    ColoringRegion(
+      id: 'inner',
+      vertices: const [
+        Point2D(35, 35),
+        Point2D(65, 35),
+        Point2D(65, 65),
+        Point2D(35, 65),
+      ],
+    ),
+  ],
+);

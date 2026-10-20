@@ -23,16 +23,12 @@ final class ColoringPage {
   final Size2D size;
   final List<ColoringRegion> regions;
 
-  /// Returns the first matching region in asset order.
-  ///
-  /// Asset order is the deterministic tie-breaker for shared boundaries.
+  /// Returns the smallest matching region so nested details remain paintable.
+  /// Asset order is the deterministic tie-breaker for equal-sized regions.
   ColoringRegion? regionAt(Point2D point) {
-    for (final region in regions) {
-      if (region.contains(point)) {
-        return region;
-      }
-    }
-    return null;
+    final matches = regions.where((region) => region.contains(point)).toList()
+      ..sort((left, right) => left.area.compareTo(right.area));
+    return matches.firstOrNull;
   }
 
   ColoringRegion regionById(String id) =>

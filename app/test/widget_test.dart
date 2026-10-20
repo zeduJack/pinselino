@@ -25,6 +25,20 @@ void main() {
     for (var index = 0; index < 8; index++) {
       expect(find.byKey(ValueKey('color_$index')), findsOneWidget);
     }
+    expect(
+      tester
+          .widget<AnimatedSlide>(find.byKey(const ValueKey('color_position_0')))
+          .offset,
+      const Offset(0, -0.14),
+    );
+    await tester.tap(find.byKey(const ValueKey('color_1')));
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<AnimatedSlide>(find.byKey(const ValueKey('color_position_1')))
+          .offset,
+      const Offset(0, -0.14),
+    );
     expect(find.byKey(const ValueKey('tool_marker')), findsOneWidget);
     expect(find.byKey(const ValueKey('tool_crayon')), findsOneWidget);
     expect(find.byKey(const ValueKey('tool_softBrush')), findsOneWidget);
