@@ -26,15 +26,14 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: keiner – Raster-Pipeline Slice 1 abgeschlossen
-- Letzter Stand: Die reproduzierbare OpenCV-Pipeline erzeugt Kontur, RGB-ID-
-  Maske, technische Pfade, Metadaten, Debug-Vorschau und Qualitätsbericht.
-  Acht Pipeline-Unit-Tests, 25 Flutter-Tests, Analyze und Android-Debug-Build
-  waren im vollständigen Gate am 2026-10-20 erfolgreich. Sechs lokale reale
-  Vorlagen wurden verarbeitet, automatisiert gegengeprüft und visuell bewertet.
-- Nächster Schritt: Slice 2 beginnt mit dem Malgruppenmodell und dem
-  Elefant-Pilot; die Installation der neuen Malfunktion folgt nach der
-  Flutter-Integration in Slice 3.
+- Aktiver Task: keiner – Raster-Pipeline Slice 2 abgeschlossen
+- Letzter Stand: Das validierte Malgruppenprofil erzeugt deterministische
+  kombinierte Pfade und eine technische Region-zu-Gruppe-Tabelle. Der Elefant
+  besitzt fünf große Easy-Malgruppen; Augen, Mund und Vordergrunddekorationen
+  bleiben geschützt. Elf Pipeline-Tests und die visuelle Gruppenvorschau sind
+  grün.
+- Nächster Schritt: Slice 3 integriert ID-Hit-Test, Gruppenclipping,
+  Rasterkontur und Querformat in Flutter.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -154,7 +153,10 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
     vollständige Repository-Gate waren grün; Elefant, Fisch, Dinosaurier und
     drei lokal ignorierte Unity-Referenzen wurden erfolgreich verarbeitet und
     visuell geprüft.
-- [ ] Slice 2: Malgruppenmodell, automatische Vorschläge und Elefant-Pilot
+- [x] Slice 2: Malgruppenmodell, automatische Vorschläge und Elefant-Pilot
+  - Verifiziert am 2026-10-20 durch elf Pipeline-Unit-Tests und visuelle
+    Kontrolle der Easy-Gruppenvorschau; vollständige, eindeutige Zuordnung aller
+    32 technischen Regionen ist erzwungen.
 - [ ] Slice 3: Raster-/Malgruppen-Laufzeit in Flutter und Querformat
 - [ ] Slice 4: Datengetriebene Kategorien und Vorlagenauswahl
 - [ ] Slice 5: versionierte Speicherung, weitere Motive und Optimierung

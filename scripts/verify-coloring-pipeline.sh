@@ -19,6 +19,7 @@ echo "==> Compile coloring-pipeline Python sources"
 PYTHONPATH="$tool_root" "$venv/bin/python" -m compileall -q \
   "$tool_root/coloring_pipeline" \
   "$tool_root/prepare_coloring_page.py" \
+  "$tool_root/prepare_paint_groups.py" \
   "$tool_root/tests"
 
 echo "==> Run coloring-pipeline unit tests"

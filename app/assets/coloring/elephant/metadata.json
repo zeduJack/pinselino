@@ -1,0 +1,464 @@
+{
+  "assetVersion": 1,
+  "category": "animals",
+  "height": 1024,
+  "id": "elephant-raster",
+  "outline": "outline.png",
+  "regionCount": 32,
+  "regionIdEncoding": "rgb24-little-endian",
+  "regions": "regions.png",
+  "schemaVersion": 1,
+  "sourceSha256": "3497b2ad157fdf5ea34608dd6ff3fb7942c97ae052fd50b6a3d97f386d8cb0ee",
+  "technicalRegions": [
+    {
+      "areaPixels": 69399,
+      "bounds": {
+        "height": 365,
+        "width": 323,
+        "x": 72,
+        "y": 213
+      },
+      "centroid": [
+        248.387,
+        400.82
+      ],
+      "id": 1
+    },
+    {
+      "areaPixels": 23962,
+      "bounds": {
+        "height": 302,
+        "width": 166,
+        "x": 10,
+        "y": 214
+      },
+      "centroid": [
+        72.295,
+        340.06
+      ],
+      "id": 2
+    },
+    {
+      "areaPixels": 23202,
+      "bounds": {
+        "height": 290,
+        "width": 145,
+        "x": 357,
+        "y": 281
+      },
+      "centroid": [
+        433.817,
+        418.256
+      ],
+      "id": 3
+    },
+    {
+      "areaPixels": 820,
+      "bounds": {
+        "height": 55,
+        "width": 48,
+        "x": 141,
+        "y": 366
+      },
+      "centroid": [
+        156.824,
+        386.974
+      ],
+      "id": 4
+    },
+    {
+      "areaPixels": 124,
+      "bounds": {
+        "height": 14,
+        "width": 11,
+        "x": 166,
+        "y": 386
+      },
+      "centroid": [
+        170.968,
+        392.919
+      ],
+      "id": 5
+    },
+    {
+      "areaPixels": 815,
+      "bounds": {
+        "height": 61,
+        "width": 38,
+        "x": 310,
+        "y": 392
+      },
+      "centroid": [
+        335.063,
+        417.855
+      ],
+      "id": 6
+    },
+    {
+      "areaPixels": 128,
+      "bounds": {
+        "height": 14,
+        "width": 12,
+        "x": 303,
+        "y": 410
+      },
+      "centroid": [
+        308.719,
+        416.547
+      ],
+      "id": 7
+    },
+    {
+      "areaPixels": 14,
+      "bounds": {
+        "height": 5,
+        "width": 4,
+        "x": 87,
+        "y": 468
+      },
+      "centroid": [
+        88.357,
+        470.214
+      ],
+      "id": 8
+    },
+    {
+      "areaPixels": 630,
+      "bounds": {
+        "height": 30,
+        "width": 45,
+        "x": 216,
+        "y": 529
+      },
+      "centroid": [
+        237.837,
+        544.89
+      ],
+      "id": 9
+    },
+    {
+      "areaPixels": 53781,
+      "bounds": {
+        "height": 269,
+        "width": 366,
+        "x": 74,
+        "y": 546
+      },
+      "centroid": [
+        252.335,
+        671.944
+      ],
+      "id": 10
+    },
+    {
+      "areaPixels": 1681,
+      "bounds": {
+        "height": 62,
+        "width": 45,
+        "x": 428,
+        "y": 568
+      },
+      "centroid": [
+        451.006,
+        602.502
+      ],
+      "id": 11
+    },
+    {
+      "areaPixels": 234,
+      "bounds": {
+        "height": 31,
+        "width": 23,
+        "x": 413,
+        "y": 632
+      },
+      "centroid": [
+        424.128,
+        648.581
+      ],
+      "id": 12
+    },
+    {
+      "areaPixels": 296,
+      "bounds": {
+        "height": 38,
+        "width": 13,
+        "x": 40,
+        "y": 647
+      },
+      "centroid": [
+        44.858,
+        667.034
+      ],
+      "id": 13
+    },
+    {
+      "areaPixels": 77,
+      "bounds": {
+        "height": 15,
+        "width": 8,
+        "x": 55,
+        "y": 663
+      },
+      "centroid": [
+        59.065,
+        670.727
+      ],
+      "id": 14
+    },
+    {
+      "areaPixels": 201,
+      "bounds": {
+        "height": 25,
+        "width": 20,
+        "x": 23,
+        "y": 668
+      },
+      "centroid": [
+        32.542,
+        680.055
+      ],
+      "id": 15
+    },
+    {
+      "areaPixels": 2286,
+      "bounds": {
+        "height": 123,
+        "width": 100,
+        "x": 44,
+        "y": 679
+      },
+      "centroid": [
+        112.769,
+        717.62
+      ],
+      "id": 16
+    },
+    {
+      "areaPixels": 95,
+      "bounds": {
+        "height": 15,
+        "width": 14,
+        "x": 19,
+        "y": 688
+      },
+      "centroid": [
+        25.926,
+        694.379
+      ],
+      "id": 17
+    },
+    {
+      "areaPixels": 500,
+      "bounds": {
+        "height": 23,
+        "width": 27,
+        "x": 68,
+        "y": 689
+      },
+      "centroid": [
+        80.878,
+        701.12
+      ],
+      "id": 18
+    },
+    {
+      "areaPixels": 396,
+      "bounds": {
+        "height": 22,
+        "width": 24,
+        "x": 400,
+        "y": 690
+      },
+      "centroid": [
+        411.402,
+        700.856
+      ],
+      "id": 19
+    },
+    {
+      "areaPixels": 188,
+      "bounds": {
+        "height": 30,
+        "width": 12,
+        "x": 463,
+        "y": 690
+      },
+      "centroid": [
+        468.521,
+        703.761
+      ],
+      "id": 20
+    },
+    {
+      "areaPixels": 291,
+      "bounds": {
+        "height": 23,
+        "width": 19,
+        "x": 428,
+        "y": 696
+      },
+      "centroid": [
+        437.708,
+        706.076
+      ],
+      "id": 21
+    },
+    {
+      "areaPixels": 35,
+      "bounds": {
+        "height": 11,
+        "width": 7,
+        "x": 449,
+        "y": 698
+      },
+      "centroid": [
+        451.8,
+        703.429
+      ],
+      "id": 22
+    },
+    {
+      "areaPixels": 443,
+      "bounds": {
+        "height": 28,
+        "width": 25,
+        "x": 39,
+        "y": 699
+      },
+      "centroid": [
+        49.433,
+        711.014
+      ],
+      "id": 23
+    },
+    {
+      "areaPixels": 570,
+      "bounds": {
+        "height": 70,
+        "width": 16,
+        "x": 26,
+        "y": 708
+      },
+      "centroid": [
+        32.574,
+        739.426
+      ],
+      "id": 24
+    },
+    {
+      "areaPixels": 183,
+      "bounds": {
+        "height": 20,
+        "width": 14,
+        "x": 446,
+        "y": 713
+      },
+      "centroid": [
+        452.858,
+        721.41
+      ],
+      "id": 25
+    },
+    {
+      "areaPixels": 6689,
+      "bounds": {
+        "height": 104,
+        "width": 88,
+        "x": 363,
+        "y": 714
+      },
+      "centroid": [
+        405.598,
+        763.79
+      ],
+      "id": 26
+    },
+    {
+      "areaPixels": 7105,
+      "bounds": {
+        "height": 101,
+        "width": 92,
+        "x": 40,
+        "y": 715
+      },
+      "centroid": [
+        86.667,
+        764.315
+      ],
+      "id": 27
+    },
+    {
+      "areaPixels": 207,
+      "bounds": {
+        "height": 41,
+        "width": 11,
+        "x": 452,
+        "y": 729
+      },
+      "centroid": [
+        457.266,
+        746.135
+      ],
+      "id": 28
+    },
+    {
+      "areaPixels": 586,
+      "bounds": {
+        "height": 27,
+        "width": 28,
+        "x": 190,
+        "y": 782
+      },
+      "centroid": [
+        202.735,
+        796.061
+      ],
+      "id": 29
+    },
+    {
+      "areaPixels": 595,
+      "bounds": {
+        "height": 26,
+        "width": 29,
+        "x": 156,
+        "y": 783
+      },
+      "centroid": [
+        170.303,
+        796.753
+      ],
+      "id": 30
+    },
+    {
+      "areaPixels": 710,
+      "bounds": {
+        "height": 29,
+        "width": 32,
+        "x": 234,
+        "y": 786
+      },
+      "centroid": [
+        250.293,
+        800.889
+      ],
+      "id": 31
+    },
+    {
+      "areaPixels": 719,
+      "bounds": {
+        "height": 28,
+        "width": 33,
+        "x": 270,
+        "y": 788
+      },
+      "centroid": [
+        285.719,
+        802.79
+      ],
+      "id": 32
+    }
+  ],
+  "title": "Elefant",
+  "width": 512
+}

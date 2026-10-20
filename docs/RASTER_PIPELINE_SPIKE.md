@@ -38,3 +38,18 @@ Die technische Segmentierung ist als Grundlage geeignet. Eine direkte
 Auslieferung aller erkannten Regionen wäre für Kinder von drei bis fünf Jahren
 nicht geeignet. Slice 2 muss kleine technische Regionen zu ungefähr 7 bis 14
 logischen Malgruppen zusammenfassen oder als geschützte Dekoration markieren.
+
+## Elefant-Pilot
+
+Das Easy-Profil reduziert 32 technische Regionen auf fünf große Malgruppen:
+
+- Kopf inklusive Rüssel und Nasenfläche
+- linkes Ohr
+- rechtes Ohr
+- Körper inklusive Zehenflächen
+- Schwanz
+
+Augen, Lichtreflexe, Mund sowie die kleinen Vordergrunddekorationen bleiben
+geschützt. Die kombinierte Debug-Vorschau wurde visuell geprüft: Die fünf
+Gruppen sind groß, klar unterscheidbar und alle geschützten Details bleiben
+weiß.

@@ -126,6 +126,39 @@ visuelle Freigabe verpflichtend.
 Slice 2 ergänzt daher ein explizites, geprüftes Modell für eigenständige,
 zusammengefasste und geschützte Regionen.
 
+## Malgruppenprofile
+
+Ein Profil weist jede technische Region genau einmal entweder einer Malgruppe
+oder `protectedRegions` zu. Unbekannte, doppelte und fehlende Zuordnungen
+brechen die Generierung ab.
+
+```json
+{
+  "schemaVersion": 1,
+  "profileId": "easy",
+  "paintGroups": [
+    {"id": "head", "title": "Kopf", "regions": [1, 8]}
+  ],
+  "protectedRegions": [4, 5, 6, 7]
+}
+```
+
+Die Runtime-Datei wird mit folgendem Befehl erzeugt:
+
+```bash
+tools/coloring_pipeline/.venv/bin/python \
+  tools/coloring_pipeline/prepare_paint_groups.py \
+  <verarbeitetes-motiv> \
+  <profil.json> \
+  <ausgabe>/paint_groups_easy.json
+```
+
+Die Ausgabe enthält die vorbereiteten Pfade jeder Malgruppe sowie eine
+Lookup-Tabelle von technischer Region zu Malgruppen-ID. Dadurch sind zur
+Laufzeit keine Pfadvereinigungen erforderlich. Geschützte Augen, Reflexe und
+Dekorationen bleiben Löcher, obwohl sie innerhalb eines größeren Körperteils
+liegen.
+
 ## Lokale Fremdreferenzen
 
 Fremde Bilder dürfen zur lokalen technischen Beurteilung verarbeitet werden,
