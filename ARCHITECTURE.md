@@ -96,20 +96,26 @@ sequenceDiagram
 
 ## 5. Motivformat
 
-Version 1 verwendet vorbereitete Vektormotive mit:
+Die vorhandenen handmodellierten Vektormotive bleiben unterstützt. Neue,
+detaillierte Malvorlagen verwenden eine vorverarbeitete Raster-/Vektor-Hybrid-
+Darstellung mit:
 
-- stabiler Motiv-ID
-- geschlossenen Teilflächen mit stabilen IDs
-- separater Konturebene
-- definierter ViewBox/Koordinatenbasis
-- Metadaten für Titel, Kategorie und Vorschau
+- stabiler Motiv- und Asset-Version
+- transparenter Konturebene `outline.png`
+- verlustfreier technischer ID-Maske `regions.png`
+- Metadaten für Abmessungen, Regionen, Titel und Kategorie
+- vorverarbeiteten Regions- beziehungsweise Malgruppenpfaden
+- getrennten lokalen Qualitäts- und Debug-Artefakten
 
-Ein Import-/Validierungsschritt muss offene Pfade, doppelte IDs, zu kleine
-Flächen und ungültige Geometrie erkennen. SVG bleibt das editierbare
-Quellformat. Ein Build-Schritt validiert und konvertiert es in vorverarbeitete,
-normalisierte Vektorgeometrie mit stabilen IDs. Die App parst im Malpfad kein
-beliebiges SVG und verwendet Rastermasken nur als späteren begründeten Fallback.
-Details und Alternativen stehen in `docs/MOTIF_PIPELINE.md`.
+Die technische Regionsmaske dient dem konstant schnellen Hit-Test. Vorbereitete
+Pfade dienen dem Canvas-Clipping und erlauben Löcher. Technische Regionen werden
+in einem nachfolgenden Produktionsschritt kindgerechten logischen Malgruppen
+zugeordnet. Während einer Fingerbewegung finden weder Bilderkennung noch
+Flood-Fill oder Pfadvereinigungen statt.
+
+Der Import-/Validierungsschritt meldet offene Konturkandidaten, kleine und
+schmale Flächen und ungültige Eingaben. Details stehen in
+`docs/MOTIF_PIPELINE.md`.
 
 ## 6. Vorgesehene Projektstruktur
 

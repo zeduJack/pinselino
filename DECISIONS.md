@@ -93,12 +93,19 @@
 ### Motiv- und Maskenpipeline
 
 - Status: `Active`
-- Entscheidung: SVG ist das editierbare Quellformat, wird aber vor dem
-  App-Build validiert und in normalisierte Vektorgeometrie mit stabilen IDs und
-  separaten Konturen konvertiert. Kein allgemeines SVG-Parsing im Malpfad;
-  Rastermasken nur als begründeter Fallback.
-- Grund: Dies verbindet frühe Asset-Validierung und deterministisches Verhalten
-  mit auflösungsunabhängigem Rendering und niedrigem Laufzeitspeicher.
+- Entscheidung: Bestehende handmodellierte Vektormotive bleiben unterstützt.
+  Neue detaillierte PNG-/JPG-Malvorlagen werden offline in eine transparente
+  Kontur, eine verlustfreie technische Regions-ID-Maske und vorberechnete
+  Regions-/Malgruppenpfade konvertiert. Technische Regionen und kindgerechte
+  Malgruppen sind getrennte Konzepte.
+- Grund: Die untersuchten KI-Bilder enthalten 30 bis über 60 geschlossene
+  Flächen. Eine ID-Maske ermöglicht einen konstant schnellen Hit-Test, während
+  vorberechnete Pfade präzises Canvas-Clipping ohne Bilderkennung zur Laufzeit
+  erlauben. Die Trennung ermöglicht manuell geprüfte Vereinfachungen und spätere
+  Schwierigkeitsprofile.
+- Abgelöst: Die frühere ausschließliche SVG-Quellstrategie bleibt für die
+  vorhandenen Motive gültig, ist aber nicht mehr das Produktionsformat für
+  detaillierte Rastervorlagen.
 
 ## Noch zu entscheiden
 

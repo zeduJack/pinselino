@@ -5,6 +5,7 @@
 .packages
 .pub-cache/
 .pub/
+.venv/
 build/
 coverage/
 

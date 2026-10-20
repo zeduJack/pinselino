@@ -26,10 +26,15 @@ Diese Datei ist die einzige Quelle für Roadmap und Arbeitsstatus.
 
 ## Current Work
 
-- Aktiver Task: keiner – Version 0.1.2 veröffentlicht
-- Letzter Stand: App auf SM-S928B installiert und visuell geprüft; lokales Gate
-  und GitHub-Release-Workflow sind grün; die öffentliche APK ist verfügbar.
-- Nächster Schritt: Weitere Änderungen beginnen mit einem neuen `[-]`-Task.
+- Aktiver Task: keiner – Raster-Pipeline Slice 1 abgeschlossen
+- Letzter Stand: Die reproduzierbare OpenCV-Pipeline erzeugt Kontur, RGB-ID-
+  Maske, technische Pfade, Metadaten, Debug-Vorschau und Qualitätsbericht.
+  Acht Pipeline-Unit-Tests, 25 Flutter-Tests, Analyze und Android-Debug-Build
+  waren im vollständigen Gate am 2026-10-20 erfolgreich. Sechs lokale reale
+  Vorlagen wurden verarbeitet, automatisiert gegengeprüft und visuell bewertet.
+- Nächster Schritt: Slice 2 beginnt mit dem Malgruppenmodell und dem
+  Elefant-Pilot; die Installation der neuen Malfunktion folgt nach der
+  Flutter-Integration in Slice 3.
 
 ## Phase 0 — Projektgrundlagen
 
@@ -141,6 +146,18 @@ Kategorien, Grenzen und Mindestflächen. Codec-Tests decken Roundtrip, leere,
 beschädigte und alte Daten ab; unbekannte Regions-IDs werden beim
 Wiederherstellen verworfen. Der vollständige Widget-Flow prüft Galerie,
 Kategorien, Werkzeuge, Autosave und Fortsetzen.
+
+## Raster-Malvorlagen und intelligente Malgruppen
+
+- [x] Slice 1: Bildvorverarbeitung und technische Regionen
+  - Verifiziert am 2026-10-20: acht synthetische Pipeline-Tests sowie der
+    vollständige Repository-Gate waren grün; Elefant, Fisch, Dinosaurier und
+    drei lokal ignorierte Unity-Referenzen wurden erfolgreich verarbeitet und
+    visuell geprüft.
+- [ ] Slice 2: Malgruppenmodell, automatische Vorschläge und Elefant-Pilot
+- [ ] Slice 3: Raster-/Malgruppen-Laufzeit in Flutter und Querformat
+- [ ] Slice 4: Datengetriebene Kategorien und Vorlagenauswahl
+- [ ] Slice 5: versionierte Speicherung, weitere Motive und Optimierung
 
 ## Phase 4 — Kinder-, Geräte- und Store-Reife
 

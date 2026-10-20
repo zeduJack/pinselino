@@ -3,6 +3,9 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+"$repo_root/scripts/verify-coloring-pipeline.sh"
+
 cd "$repo_root/app"
 
 echo "==> Resolve Flutter dependencies"

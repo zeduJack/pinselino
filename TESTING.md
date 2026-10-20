@@ -12,6 +12,7 @@ Verbindliche Basis:
 - Flutter-eigene Golden-Tests für stabile Canvas-/Maskenresultate
 - stabile `ValueKey`s oder Semantics für app-eigene Bedienelemente
 - Screenshots zur manuellen visuellen Prüfung, nicht als alleinige Testwahrheit
+- Python `unittest` für die Offline-Bildvorverarbeitung
 
 Später beim ersten echten Gerätefluss:
 
@@ -106,6 +107,11 @@ flutter test
 - nur bei vollständigem Erfolg committen beziehungsweise pushen
 - auch bei reinen Dokumentationsänderungen ausführen
 
+Der Gate ruft zuerst `scripts/verify-coloring-pipeline.sh` auf. Dieses Skript
+verwaltet eine ignorierte virtuelle Python-Umgebung, installiert die gepinnten
+OpenCV-/NumPy-/Pillow-Versionen, kompiliert die Python-Quellen und führt alle
+Pipeline-Unit-Tests aus.
+
 Der Gate löst Abhängigkeiten auf, prüft Formatierung, führt Analyse und alle
 Unit-/Widget-/Golden-Tests aus und baut ein Android-Debug-APK. Weitere
 deterministische Integrationstests werden aufgenommen, sobald sie Teil der
@@ -139,3 +145,5 @@ Referenzgerät grün sein. Messszenario, Budgets und Ergebnisse stehen in
 - Testmotive bleiben klein und enthalten bekannte Randfälle.
 - Golden-Baselines werden nur nach bewusster visueller Prüfung aktualisiert.
 - Laufzeitbilder, Reports und temporäre Screenshots werden nicht committet.
+- Tests der Bildpipeline erzeugen ihre Vorlagen programmatisch und verwenden
+  keine fremden Referenzgrafiken als versionierte Fixtures.
