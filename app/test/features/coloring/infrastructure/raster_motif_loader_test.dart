@@ -15,25 +15,25 @@ void main() {
 
       expect(page.id, 'elephant-raster');
       expect(page.size.width, 512);
-      expect(page.size.height, 1024);
+      expect(page.size.height, 760);
       expect(page.regions, hasLength(5));
       expect(page.regionById('body').paths.length, greaterThan(5));
-      expect(page.regionAt(const Point2D(251, 402))?.id, 'head');
-      expect(page.regionAt(const Point2D(171, 392)), isNull);
+      expect(page.regionAt(const Point2D(251, 242))?.id, 'head');
+      expect(page.regionAt(const Point2D(171, 232)), isNull);
       expect(loaded.outlineImage.width, 512);
-      expect(loaded.outlineImage.height, 1024);
+      expect(loaded.outlineImage.height, 760);
 
       final controller = ColoringController(page: page);
       expect(
         controller.beginStroke(
-          point: const Point2D(251, 402),
+          point: const Point2D(251, 242),
           colorArgb: 0xFFFF0000,
           width: 40,
         ),
         isTrue,
       );
       controller
-        ..extendStroke(const Point2D(75, 345))
+        ..extendStroke(const Point2D(75, 185))
         ..endStroke();
       expect(controller.strokes.single.regionId, 'head');
       loaded.outlineImage.dispose();

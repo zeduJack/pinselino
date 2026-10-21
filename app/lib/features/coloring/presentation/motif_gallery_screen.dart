@@ -217,8 +217,8 @@ class _MotifGalleryScreenState extends State<MotifGalleryScreen> {
                     final definition = visibleRaster[index];
                     return _RasterMotifCard(
                       definition: definition,
-                      hasProgress:
-                          (_progress[definition.id] ?? const []).isNotEmpty,
+                      strokes: _progress[definition.id] ?? const [],
+                      loader: widget.rasterLoader,
                       onTap: () => _selectRaster(definition),
                     );
                   }
@@ -248,48 +248,86 @@ class _MotifGalleryScreenState extends State<MotifGalleryScreen> {
   );
 }
 
-class _RasterMotifCard extends StatelessWidget {
+class _RasterMotifCard extends StatefulWidget {
   const _RasterMotifCard({
     required this.definition,
-    required this.hasProgress,
+    required this.strokes,
     required this.onTap,
+    this.loader,
   });
 
   final RasterMotifDefinition definition;
-  final bool hasProgress;
+  final List<PaintStroke> strokes;
   final VoidCallback onTap;
+  final RasterMotifLoader? loader;
+
+  @override
+  State<_RasterMotifCard> createState() => _RasterMotifCardState();
+}
+
+class _RasterMotifCardState extends State<_RasterMotifCard> {
+  Future<LoadedRasterMotif>? _future;
+  LoadedRasterMotif? _loaded;
+  var _generation = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.strokes.isNotEmpty) _load();
+  }
+
+  @override
+  void didUpdateWidget(covariant _RasterMotifCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.definition.id != widget.definition.id) {
+      _generation++;
+      _loaded?.outlineImage.dispose();
+      _loaded = null;
+      _future = null;
+    }
+    if (widget.strokes.isNotEmpty && _future == null) _load();
+  }
+
+  void _load() {
+    final generation = _generation;
+    _future = (widget.loader ?? RasterMotifLoader())
+        .load(widget.definition)
+        .then((loaded) {
+          if (!mounted || generation != _generation) {
+            loaded.outlineImage.dispose();
+          } else {
+            _loaded = loaded;
+          }
+          return loaded;
+        });
+  }
+
+  @override
+  void dispose() {
+    _loaded?.outlineImage.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => Card(
     clipBehavior: Clip.antiAlias,
     child: InkWell(
-      key: ValueKey('motif_${definition.id}'),
-      onTap: onTap,
+      key: ValueKey('motif_${widget.definition.id}'),
+      onTap: widget.onTap,
       child: Column(
         children: [
-          Expanded(
-            child: ColoredBox(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Image.asset(
-                  '${definition.assetDirectory}/outline.png',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-          ),
+          Expanded(child: _preview()),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
-                    definition.title,
+                    widget.definition.title,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-                if (hasProgress)
+                if (widget.strokes.isNotEmpty)
                   const Icon(Icons.palette_rounded, color: Color(0xFF6C5CE7)),
               ],
             ),
@@ -298,6 +336,39 @@ class _RasterMotifCard extends StatelessWidget {
       ),
     ),
   );
+
+  Widget _preview() {
+    if (widget.strokes.isEmpty) {
+      return ColoredBox(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Image.asset(
+            '${widget.definition.assetDirectory}/outline.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+      );
+    }
+    return FutureBuilder<LoadedRasterMotif>(
+      future: _future,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        final loaded = snapshot.requireData;
+        final controller = ColoringController(page: loaded.motif.page)
+          ..restore(widget.strokes);
+        return IgnorePointer(
+          child: ColoringCanvas(
+            key: ValueKey('raster_preview_colored_${widget.definition.id}'),
+            controller: controller,
+            outlineImage: loaded.outlineImage,
+          ),
+        );
+      },
+    );
+  }
 }
 
 class _MotifCard extends StatelessWidget {

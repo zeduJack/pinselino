@@ -165,6 +165,16 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
     beide Layouts visuell geprüft; Querformat zeigt Werkzeuge und Größen links,
     Farben rechts und das Motiv ohne Overflow über nahezu die gesamte Höhe.
     Lokaler Debug-Build mit Referenzmotiven erfolgreich installiert.
+- [x] Slice 3.2: verständliche Malwerkzeuge und echte Rastervorschauen
+  - Verifiziert am 2026-10-21: 30 Flutter-Tests und elf Pipeline-Tests grün;
+    Querformat-Stiftrichtung, Auswahlrahmen, verschiedene Dicken und echte
+    Rastervorschau sind automatisiert abgedeckt. Auf Samsung SM-S928B wurden
+    Hoch- und Querformat visuell geprüft: Werkzeuge sind als Stift, Kreide,
+    Pinsel und Radierer erkennbar, horizontale Stifte zeigen nach rechts,
+    Auswahlzustände sind deutlich und die Galerie zeigt gespeicherte Farbe.
+    Der Elefant wurde verlustfrei von 512×1024 auf 512×760 zugeschnitten, erneut
+    als 32 Regionen/fünf Malgruppen validiert und als lokaler Debug-Build
+    installiert.
 - [ ] Slice 4: Datengetriebene Kategorien und Vorlagenauswahl
 - [ ] Slice 5: versionierte Speicherung, weitere Motive und Optimierung
 

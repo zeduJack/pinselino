@@ -35,6 +35,19 @@ void main() {
         tester.getCenter(find.byKey(const ValueKey('color_0'))).dx,
         greaterThan(tester.getCenter(canvas).dx),
       );
+      expect(
+        find.byKey(const ValueKey('color_pencil_horizontal_0')),
+        findsOneWidget,
+      );
+
+      await tester.tap(find.byKey(const ValueKey('tool_softBrush')));
+      await tester.pump();
+      final selectedTool = tester.widget<AnimatedContainer>(
+        find.byKey(const ValueKey('tool_surface_softBrush')),
+      );
+      expect((selectedTool.decoration! as BoxDecoration).border!.top.width, 3);
+      await tester.tap(find.byKey(const ValueKey('tool_marker')));
+      await tester.pump();
 
       await tester.tap(find.byKey(const ValueKey('brush_size_small')));
       await tester.pump();
@@ -65,12 +78,10 @@ void main() {
         tester.getCenter(find.byKey(const ValueKey('color_0'))).dy,
         greaterThan(tester.getCenter(canvas).dy),
       );
-      expect(
-        tester
-            .widget<IconButton>(find.byKey(const ValueKey('brush_size_large')))
-            .isSelected,
-        isTrue,
+      final selectedSize = tester.widget<AnimatedContainer>(
+        find.byKey(const ValueKey('brush_size_surface_large')),
       );
+      expect((selectedSize.decoration! as BoxDecoration).border!.top.width, 3);
     },
   );
 }

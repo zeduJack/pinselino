@@ -240,7 +240,6 @@ class _ToolBar extends StatelessWidget {
       _ToolButton(
         kind: BrushKind.marker,
         label: 'Stift',
-        icon: Icons.edit_rounded,
         compact: axis == Axis.vertical,
         selected: selected,
         onSelected: onSelected,
@@ -248,7 +247,6 @@ class _ToolBar extends StatelessWidget {
       _ToolButton(
         kind: BrushKind.crayon,
         label: 'Kreide',
-        icon: Icons.draw_rounded,
         compact: axis == Axis.vertical,
         selected: selected,
         onSelected: onSelected,
@@ -256,7 +254,6 @@ class _ToolBar extends StatelessWidget {
       _ToolButton(
         kind: BrushKind.softBrush,
         label: 'Pinsel',
-        icon: Icons.brush_rounded,
         compact: axis == Axis.vertical,
         selected: selected,
         onSelected: onSelected,
@@ -264,7 +261,6 @@ class _ToolBar extends StatelessWidget {
       _ToolButton(
         kind: BrushKind.eraser,
         label: 'Radierer',
-        icon: Icons.auto_fix_normal_rounded,
         compact: axis == Axis.vertical,
         selected: selected,
         onSelected: onSelected,
@@ -289,7 +285,6 @@ class _ToolButton extends StatelessWidget {
   const _ToolButton({
     required this.kind,
     required this.label,
-    required this.icon,
     required this.compact,
     required this.selected,
     required this.onSelected,
@@ -297,40 +292,172 @@ class _ToolButton extends StatelessWidget {
 
   final BrushKind kind;
   final String label;
-  final IconData icon;
   final bool compact;
   final BrushKind selected;
   final ValueChanged<BrushKind> onSelected;
 
   @override
   Widget build(BuildContext context) {
-    if (compact) {
-      return Semantics(
-        label: label,
-        button: true,
-        selected: selected == kind,
-        child: IconButton.filledTonal(
-          key: ValueKey('tool_${kind.name}'),
-          tooltip: label,
-          constraints: const BoxConstraints.tightFor(width: 40, height: 40),
-          padding: const EdgeInsets.all(8),
-          isSelected: selected == kind,
-          onPressed: () => onSelected(kind),
-          icon: Icon(icon),
-        ),
-      );
-    }
+    final isSelected = selected == kind;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-      child: ChoiceChip(
-        key: ValueKey('tool_${kind.name}'),
-        selected: selected == kind,
-        onSelected: (_) => onSelected(kind),
-        avatar: Icon(icon),
-        label: Text(label),
+      child: Semantics(
+        label: label,
+        button: true,
+        selected: isSelected,
+        child: Tooltip(
+          message: label,
+          child: InkWell(
+            key: ValueKey('tool_${kind.name}'),
+            borderRadius: BorderRadius.circular(16),
+            onTap: () => onSelected(kind),
+            child: AnimatedContainer(
+              key: ValueKey('tool_surface_${kind.name}'),
+              duration: const Duration(milliseconds: 160),
+              width: compact ? 44 : 58,
+              height: compact ? 44 : 58,
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? const Color(0xFFE4DEFF)
+                    : Colors.white.withValues(alpha: 0.72),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: isSelected
+                      ? const Color(0xFF5146A8)
+                      : const Color(0xFFD8D3E1),
+                  width: isSelected ? 3 : 1.5,
+                ),
+                boxShadow: isSelected
+                    ? const [
+                        BoxShadow(
+                          color: Color(0x335146A8),
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
+                        ),
+                      ]
+                    : null,
+              ),
+              child: CustomPaint(
+                key: ValueKey('tool_image_${kind.name}'),
+                painter: _ToolIllustrationPainter(kind),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
+}
+
+class _ToolIllustrationPainter extends CustomPainter {
+  const _ToolIllustrationPainter(this.kind);
+
+  final BrushKind kind;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas
+      ..save()
+      ..translate(size.width / 2, size.height / 2)
+      ..rotate(-0.72)
+      ..translate(-size.width / 2, -size.height / 2);
+    final outline = Paint()
+      ..color = const Color(0xFF252333)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.8;
+    switch (kind) {
+      case BrushKind.marker:
+        final pencilBody = RRect.fromRectAndRadius(
+          Rect.fromLTWH(size.width / 2 - 7, 9, 14, size.height - 14),
+          const Radius.circular(3),
+        );
+        final pencilTip = Path()
+          ..moveTo(size.width / 2 - 7, 9)
+          ..lineTo(size.width / 2, 1)
+          ..lineTo(size.width / 2 + 7, 9)
+          ..close();
+        canvas
+          ..drawRRect(pencilBody, Paint()..color = const Color(0xFF00A8FF))
+          ..drawRRect(pencilBody, outline)
+          ..drawPath(pencilTip, Paint()..color = const Color(0xFFFFE5B4))
+          ..drawPath(pencilTip, outline)
+          ..drawCircle(
+            Offset(size.width / 2, 3.5),
+            2.2,
+            Paint()..color = const Color(0xFF252333),
+          )
+          ..drawRect(
+            Rect.fromLTWH(size.width / 2 - 7, size.height - 11, 14, 6),
+            Paint()..color = const Color(0xFFE84393),
+          );
+        break;
+      case BrushKind.crayon:
+        final crayonBody = RRect.fromRectAndRadius(
+          Rect.fromLTWH(10, 12, size.width - 20, size.height - 18),
+          const Radius.circular(4),
+        );
+        canvas
+          ..drawRRect(crayonBody, Paint()..color = const Color(0xFFFFC312))
+          ..drawRRect(crayonBody, outline);
+        canvas.drawPath(
+          Path()
+            ..moveTo(10, 12)
+            ..lineTo(size.width / 2, 3)
+            ..lineTo(size.width - 10, 12)
+            ..close(),
+          Paint()..color = const Color(0xFFFFC312),
+        );
+        for (final y in [20.0, size.height - 11]) {
+          canvas.drawLine(
+            Offset(11, y),
+            Offset(size.width - 11, y),
+            Paint()
+              ..color = const Color(0xFFD89000)
+              ..strokeWidth = 2,
+          );
+        }
+        break;
+      case BrushKind.softBrush:
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(
+            Rect.fromLTWH(size.width / 2 - 4, 20, 8, size.height - 23),
+            const Radius.circular(4),
+          ),
+          Paint()..color = const Color(0xFF9A603C),
+        );
+        canvas.drawRect(
+          Rect.fromLTWH(size.width / 2 - 7, 14, 14, 9),
+          Paint()..color = const Color(0xFFB9C1C7),
+        );
+        canvas.drawPath(
+          Path()
+            ..moveTo(size.width / 2 - 7, 14)
+            ..quadraticBezierTo(size.width / 2, 1, size.width / 2 + 7, 14)
+            ..close(),
+          Paint()..color = const Color(0xFFE84393),
+        );
+        break;
+      case BrushKind.eraser:
+        final eraser = RRect.fromRectAndRadius(
+          Rect.fromLTWH(7, 12, size.width - 14, size.height - 22),
+          const Radius.circular(5),
+        );
+        canvas
+          ..drawRRect(eraser, Paint()..color = const Color(0xFFFF7EB6))
+          ..drawRRect(eraser, outline);
+        canvas.drawRect(
+          Rect.fromLTWH(7, size.height - 18, size.width - 14, 8),
+          Paint()..color = const Color(0xFF61C5D8),
+        );
+        break;
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(covariant _ToolIllustrationPainter oldDelegate) =>
+      oldDelegate.kind != kind;
 }
 
 class _BrushSizePicker extends StatelessWidget {
@@ -352,25 +479,37 @@ class _BrushSizePicker extends StatelessWidget {
         label: size.label,
         button: true,
         selected: isSelected,
-        child: IconButton.filledTonal(
-          key: ValueKey('brush_size_${size.name}'),
-          tooltip: size.label,
-          onPressed: () => onSelected(size),
-          constraints: axis == Axis.vertical
-              ? const BoxConstraints.tightFor(width: 40, height: 40)
-              : null,
-          padding: const EdgeInsets.all(8),
-          isSelected: isSelected,
-          icon: Container(
-            width: 24,
-            height: 24,
-            alignment: Alignment.center,
-            child: Container(
-              width: 7 + (BrushSize.values.indexOf(size) * 5),
-              height: 7 + (BrushSize.values.indexOf(size) * 5),
-              decoration: const BoxDecoration(
-                color: Color(0xFF252333),
-                shape: BoxShape.circle,
+        child: Tooltip(
+          message: size.label,
+          child: InkWell(
+            key: ValueKey('brush_size_${size.name}'),
+            borderRadius: BorderRadius.circular(14),
+            onTap: () => onSelected(size),
+            child: AnimatedContainer(
+              key: ValueKey('brush_size_surface_${size.name}'),
+              duration: const Duration(milliseconds: 160),
+              width: axis == Axis.vertical ? 44 : 54,
+              height: axis == Axis.vertical ? 44 : 48,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? const Color(0xFFFFE19A)
+                    : Colors.white.withValues(alpha: 0.7),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: isSelected
+                      ? const Color(0xFF8A5B00)
+                      : const Color(0xFFD8D3E1),
+                  width: isSelected ? 3 : 1.5,
+                ),
+              ),
+              child: Container(
+                width: 27,
+                height: 3 + (BrushSize.values.indexOf(size) * 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF252333),
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ),
@@ -399,15 +538,17 @@ class _ColorPalette extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    width: axis == Axis.vertical ? 62 : null,
-    height: axis == Axis.horizontal ? 78 : null,
+    width: axis == Axis.vertical ? 104 : null,
+    height: axis == Axis.horizontal ? 82 : null,
     child: ListView.separated(
       padding: axis == Axis.horizontal
           ? const EdgeInsets.fromLTRB(6, 10, 6, 0)
           : const EdgeInsets.fromLTRB(10, 6, 4, 6),
       scrollDirection: axis,
       itemCount: coloringPalette.length,
-      separatorBuilder: (_, _) => const SizedBox(width: 7),
+      separatorBuilder: (_, _) => axis == Axis.horizontal
+          ? const SizedBox(width: 7)
+          : const SizedBox(height: 7),
       itemBuilder: (context, index) {
         final color = coloringPalette[index];
         final isSelected = color == selectedColor;
@@ -428,7 +569,16 @@ class _ColorPalette extends StatelessWidget {
                         ? const Offset(0, -0.12)
                         : const Offset(-0.12, 0))
                   : Offset.zero,
-              child: _ColorPencil(color: Color(color), selected: isSelected),
+              child: _ColorPencil(
+                key: ValueKey(
+                  'color_pencil_${axis == Axis.vertical ? 'horizontal' : 'vertical'}_$index',
+                ),
+                direction: axis == Axis.vertical
+                    ? Axis.horizontal
+                    : Axis.vertical,
+                color: Color(color),
+                selected: isSelected,
+              ),
             ),
           ),
         );
@@ -438,56 +588,116 @@ class _ColorPalette extends StatelessWidget {
 }
 
 class _ColorPencil extends StatelessWidget {
-  const _ColorPencil({required this.color, required this.selected});
+  const _ColorPencil({
+    required this.direction,
+    required this.color,
+    required this.selected,
+    super.key,
+  });
 
+  final Axis direction;
   final Color color;
   final bool selected;
 
   @override
   Widget build(BuildContext context) => AnimatedContainer(
     duration: const Duration(milliseconds: 180),
-    width: 38,
-    height: 64,
+    width: direction == Axis.horizontal ? 88 : 38,
+    height: direction == Axis.horizontal ? 36 : 70,
     decoration: BoxDecoration(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(18),
-        bottom: Radius.circular(7),
-      ),
-      color: color,
+      borderRadius: BorderRadius.circular(9),
       border: Border.all(
-        color: selected ? const Color(0xFF252333) : Colors.white,
-        width: selected ? 4 : 2,
+        color: selected ? const Color(0xFF252333) : Colors.transparent,
+        width: selected ? 3 : 1,
       ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: selected ? 0.3 : 0.12),
-          blurRadius: selected ? 8 : 3,
-          offset: Offset(0, selected ? 5 : 2),
+          color: Colors.black.withValues(alpha: selected ? 0.28 : 0.1),
+          blurRadius: selected ? 7 : 3,
+          offset: const Offset(0, 2),
         ),
       ],
     ),
-    child: Column(
-      children: [
-        const SizedBox(height: 8),
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.55),
-            shape: BoxShape.circle,
-          ),
-        ),
-        const Spacer(),
-        Container(
-          height: 10,
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.12),
-            borderRadius: const BorderRadius.vertical(
-              bottom: Radius.circular(5),
-            ),
-          ),
-        ),
-      ],
-    ),
+    child: CustomPaint(painter: _ColorPencilPainter(color, direction)),
   );
+}
+
+class _ColorPencilPainter extends CustomPainter {
+  const _ColorPencilPainter(this.color, this.direction);
+
+  final Color color;
+  final Axis direction;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final border = Paint()
+      ..color = const Color(0xFF252333)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.4;
+    if (direction == Axis.horizontal) {
+      final body = RRect.fromRectAndRadius(
+        Rect.fromLTWH(3, 5, size.width - 21, size.height - 10),
+        const Radius.circular(5),
+      );
+      canvas.drawRRect(body, Paint()..color = color);
+      canvas.drawRRect(body, border);
+      canvas.drawPath(
+        Path()
+          ..moveTo(size.width - 18, 5)
+          ..lineTo(size.width - 3, size.height / 2)
+          ..lineTo(size.width - 18, size.height - 5)
+          ..close(),
+        Paint()..color = const Color(0xFFFFE5B4),
+      );
+      canvas.drawPath(
+        Path()
+          ..moveTo(size.width - 7, size.height / 2 - 3)
+          ..lineTo(size.width - 3, size.height / 2)
+          ..lineTo(size.width - 7, size.height / 2 + 3)
+          ..close(),
+        Paint()..color = color,
+      );
+      canvas.drawLine(
+        const Offset(12, 7),
+        Offset(size.width - 20, 7),
+        Paint()
+          ..color = Colors.white.withValues(alpha: 0.45)
+          ..strokeWidth = 3,
+      );
+    } else {
+      final body = RRect.fromRectAndRadius(
+        Rect.fromLTWH(5, 18, size.width - 10, size.height - 21),
+        const Radius.circular(5),
+      );
+      canvas.drawRRect(body, Paint()..color = color);
+      canvas.drawRRect(body, border);
+      canvas.drawPath(
+        Path()
+          ..moveTo(5, 18)
+          ..lineTo(size.width / 2, 3)
+          ..lineTo(size.width - 5, 18)
+          ..close(),
+        Paint()..color = const Color(0xFFFFE5B4),
+      );
+      canvas.drawPath(
+        Path()
+          ..moveTo(size.width / 2 - 3, 7)
+          ..lineTo(size.width / 2, 3)
+          ..lineTo(size.width / 2 + 3, 7)
+          ..close(),
+        Paint()..color = color,
+      );
+      canvas.drawLine(
+        const Offset(8, 25),
+        Offset(size.width - 8, 25),
+        Paint()
+          ..color = Colors.white.withValues(alpha: 0.45)
+          ..strokeWidth = 3,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _ColorPencilPainter oldDelegate) =>
+      oldDelegate.color != color || oldDelegate.direction != direction;
 }
