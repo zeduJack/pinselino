@@ -158,6 +158,13 @@ Kategorien, Werkzeuge, Autosave und Fortsetzen.
     Querformat visuell geprüft; Elefant und drei ausschließlich lokal
     eingebundene Unity-PoC-Motive laden, Kontur und Startregion begrenzen den
     gezeichneten Strich. Lokale Fremdassets bleiben ignoriert.
+- [x] Slice 3.1: responsive Malfläche und kindgerechte Strichdickenwahl
+  - Verifiziert am 2026-10-21: 29 Flutter-Tests und elf Pipeline-Tests grün;
+    Hoch-/Querformatwechsel, erhaltener UI-Zustand und drei unterschiedliche
+    Strichbreiten sind als Widget-Test abgedeckt. Auf Samsung SM-S928B wurden
+    beide Layouts visuell geprüft; Querformat zeigt Werkzeuge und Größen links,
+    Farben rechts und das Motiv ohne Overflow über nahezu die gesamte Höhe.
+    Lokaler Debug-Build mit Referenzmotiven erfolgreich installiert.
 - [ ] Slice 4: Datengetriebene Kategorien und Vorlagenauswahl
 - [ ] Slice 5: versionierte Speicherung, weitere Motive und Optimierung
 

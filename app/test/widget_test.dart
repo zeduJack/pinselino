@@ -30,7 +30,7 @@ void main() {
       tester
           .widget<AnimatedSlide>(find.byKey(const ValueKey('color_position_0')))
           .offset,
-      const Offset(0, -0.14),
+      const Offset(-0.12, 0),
     );
     await tester.tap(find.byKey(const ValueKey('color_1')));
     await tester.pumpAndSettle();
@@ -38,7 +38,7 @@ void main() {
       tester
           .widget<AnimatedSlide>(find.byKey(const ValueKey('color_position_1')))
           .offset,
-      const Offset(0, -0.14),
+      const Offset(-0.12, 0),
     );
     expect(find.byKey(const ValueKey('tool_marker')), findsOneWidget);
     expect(find.byKey(const ValueKey('tool_crayon')), findsOneWidget);
